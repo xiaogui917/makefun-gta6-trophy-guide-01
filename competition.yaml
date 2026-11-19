@@ -1,0 +1,692 @@
+# gta6-trophy-guide-01: "Build the best GTA 6 trophy guide", judged by the house AI judge on a dossier (program/v1 +
+# harness.judge, media dossier, an unscreened final over a contender cap, contend rounds on the dev board). OPEN (the
+# owner's thumbs up, 2026-11-19: "if it seems like it works let's just ship it"): status open and visibility public, in
+# production's seed catalogue in a block of its own, its catalogue row in tests/unit/catalogue.test.ts OPENED_IN_TURN;
+# 48 hours of entries from 2026-11-19T11:00Z, the second of the GTA 6 launch slate's three openings 30 minutes apart from
+# 10:30Z, set by scripts/redate-bundle.ts --unescrowed (proposed at the seal for 07:30Z). It landed first as a sealed
+# internal draft for the owner's review; a seed that inserts it open funds its $250 escrow within a minute, and its
+# bytes never change from then (a fix is a new slug).
+#
+# The ask (the GTA 6 launch slate, 2026-11-18; Grand Theft Auto VI releases 2026-11-19): the owner asked for useful GTA 6
+# tools, guides or stats, and trophy guides are among the most-read guides for any big game. The money and window are
+# the owner's, relayed by the root on 2026-11-18: "gta6-trophy-guide-01 carries the $250 hundred-place table and a
+# 48-hour window". This draft carries the $250 fifty-place table instead (below, The money): a hundred paid places do
+# not fit a judged dossier final under the grading-time ceiling, so the owner decides between them before go-live.
+#
+# What wins, and what it beats. The public trophy guides (PowerPyx, PlayStationTrophies.org, PSNProfiles' guides,
+# TrueTrophies, Exophase's lists) are web pages with ads, behind a network, written per site and not yet complete for a
+# game a day old; the trackers (PSNProfiles, Exophase) track by syncing a PSN account and give no guide. An entry here
+# is an OSI-licensed static web app that works offline from its own files: a tracker over every one of the 55 official
+# trophies with its name, description and grade (a checklist saved in the browser with export and import, filters by
+# kind, and a spoiler setting that hides story trophies until earned), a roadmap to the platinum and the missables
+# flagged, built from the official descriptions, and a guide to each in the entrant's own words that cites its sources
+# (what to do, where, when it can be missed). The winner is a free, open-source, offline GTA 6 trophy guide and tracker
+# anyone can host or fork, featured in make.fun's posts. The judge cannot play the game or confirm a claim about it, so
+# the rubric ranks what a screenshot lets it check (the run review of 2026-11-19, accepted: a rubric paying for "where
+# and how" while the rules forbade every outside source paid for invented walkthroughs make.fun would then feature): the
+# tracker and its data against the official list first, then the roadmap and missable flags built from the official
+# descriptions, then guidance that cites its sources, the prompt giving no credit for a specific location or step that
+# cites none, then speed, clarity and polish. The rules let an entry draw on other guides and cite them, never copy
+# their text.
+#
+# Each entry's program, main.ts (Node 22), hands in the guide it built, as makefun-frontend-01's entries hand in a
+# frontend: it copies app/ (static files: app/index.html, its modules, styles and data, app/data/trophies.json among
+# them) and screenshots/ (3 or 4 PNG or JPEG screens) from its repository to /output, and writes /output/dossier.json with
+# vendor/makefun-frontend.ts buildDossier, the library the kit ships (sdk/frontend/makefun-frontend.ts, byte for byte the
+# scorer's own copy). The sealed gate (scorer/score.ts, its limits reference/gate.json, the official list
+# reference/trophies.json) checks six rows and writes valid from the first five; the judge reads two entries at a time,
+# each as its dossier's dossier-view/v1 view (server/judging/dossier-view.ts at dossierViewBudgetOf's default 1,536
+# input tokens an entry: this slug is not on DOSSIER_VIEW_BUDGETS): one JPEG contact sheet of every screenshot, the cover
+# on top, then an outline of the text (the Load block's Totals line, each source file's path, size and declarations; a
+# JSON file by its path and size alone, so the guides' words reach the judge only through the screenshots, and the
+# rules say so), and picks one with a margin from 1 to 5 (verdict v2); the entries rank by win rate (resolution.method
+# judges). The judge block names superbot at reasoning_effort high with max_output_tokens 17200, gta6-01's; every heat,
+# dev and final, is played on OpenRouter z-ai/glm-5.3-flash at its own measured effort and the block's output budget
+# (the owner's order of 2026-11-17, server/judging/plan.ts), and the rules say so. An OpenRouter heat sends each call
+# once (grader/judge-backup.ts judgeBackupRuleOf); an answer with no verdict is asked once more (grader/judge-call.ts
+# JUDGE_CALL_ATTEMPTS 2). The top 10 of the settled final heat are held up to 60 minutes for the make.fun team's
+# finalist review (harness.judge.review), which opens each by serving app/ with a static file server and opening
+# index.html in desktop Chrome with the network off, and checks what no gate can: that the guide reaches for no network,
+# that its guides are its own words, and that it shows no Rockstar logo or official artwork.
+#
+#   scorer/            makefun-frontend-01's app/ gate, adapted, so its digest is this bundle's own: score.ts with no
+#                      origin allowed besides app/ itself (makefun-frontend-01 allowed https://make.fun), media and icon
+#                      references (<img>, <source>, <video>, <audio>, <track>, <input type=image> src, srcset and
+#                      poster; icon and manifest links; a stylesheet's every url(), a url(#id) fragment passed) held to
+#                      app/ too, a font or media one allowed as a data: URL, and a sixth row, trophies: app/data/
+#                      trophies.json, at most trophies_max_bytes, an object with a "trophies" array (or the array), names
+#                      each of reference/trophies.json's 55 trophies by an item whose "name" equals it under nameKey
+#                      (NFKC, curly quotes straight, dashes -, the ellipsis three dots, white space folded, lower case)
+#                      and whose "guide" is not blank; valid when the first five rows pass, js_parses shown only.
+#                      images.ts, makefun-frontend.ts (sdk/frontend/makefun-frontend.ts byte for byte) and vendor/acorn.mjs
+#                      (acorn 8.19.0, its LICENSE beside it) are makefun-frontend-01's byte for byte.
+#   reference/         gate.json, gta6-01's limits on app/ in place of game/: app/ at most 993 files and directories and
+#                      48 MiB, each path at most 1,000 UTF-8 bytes, app/index.html at most 1 MiB, 3 to 4 screenshots of at
+#                      most 256 KiB, long side at most 1280 and short side at least 480 pixels, the dossier at most 1.5
+#                      MiB and its text at most 163,840 bytes, and trophies_max_bytes 2 MiB. trophies.json, the official
+#                      PlayStation 5 list frozen on 2026-11-18 with its sources in it: every name, description, grade and
+#                      hidden flag from https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/ (plain HTTP), each
+#                      grade and PSN's progress targets from https://psnprofiles.com/trophies/43531-grand-theft-auto-vi
+#                      (a browser render), the two agreeing on every name, description and grade: 55 trophies, 1
+#                      platinum, 2 gold, 6 silver, 46 bronze, 28 hidden; "T**s Ass Drug Money" as PSN publishes it. The
+#                      kit carries no reference/ (a judged kit ships nothing sealed), so the starter's app/data/
+#                      trophies.json carries the same list whole, and the rules point at it.
+#   judge/prompt.txt   the judge's persona and its rubric, four criteria ranked most important first (the tracker and
+#                      its data: the official names, descriptions and grades, saved progress, filters, the spoiler
+#                      setting, export and import; the roadmap and missables built from the official descriptions; cited
+#                      guidance, no credit for an uncited specific; fast, clear and polished, with copying and
+#                      Rockstar's art losing), the line that the judge cannot play the game or confirm a claim, the
+#                      official list's make-up (55: 1 platinum, 2 gold, 6 silver, 46 bronze), and the close-pair rule,
+#                      published word for word in the rules; 2,355 bytes, so a call fits JUDGE_CALL_INPUT_TOKENS_MAX
+#                      (below).
+#   judge/anchors/     four house guides, weak to strong, each a dossier as an entry writes one, built by the house
+#                      (their sources are the dossiers' own text, whole): 1-weak, a bare list of the 55 names, grades and
+#                      one-line hints, unstyled, no tracker; 2-plain, the starter: a checklist table saved in
+#                      localStorage, a grade filter, export and import, one-line hints; 3-mid, "Leonida trophy tracker",
+#                      kind filters, a hidden-trophy switch, a guide pane with each trophy's full guide and its missable
+#                      note; 4-strong, "Platinum Road", the house engine (below) with its checklist, guide pane, roadmap,
+#                      spoiler setting and save page, on a light paper look. Every guide is the house's own words, from
+#                      the trophy list's names, descriptions and PSN targets alone (the house played nothing, and the
+#                      guides say plainly where a place is not pinned down). The screenshots are Playwright Chromium
+#                      renders at 1280 x 800, JPEG quality 82, of the apps served from their own files with progress
+#                      seeded (13 of 55 earned, counters part way), every request checked to stay on app/. The engine's
+#                      guide pane names each trophy's sources (Sources: the official list on Exophase for its name,
+#                      description and grade, PSNProfiles for PSN's count where it has one, and "our own advice from the
+#                      official description, not yet checked in the game" for the guide, a link where the source is a
+#                      page), its header the official list's make-up, and its roadmap and missables pages say they are
+#                      built from the official descriptions: the house cites what it has and claims nothing it has not
+#                      checked. 1-weak, 2-plain and 3-mid cite nothing (their bytes unchanged since the first seal).
+#   ladder/            the calibrated dev ladder (harness.judge.ladder, contend beside it): calibration.json and three
+#                      rungs, the house engine with more of its parts on: rungs/5-pro.json "Night Shift Trophies"
+#                      (search, the missables page, progress counters for PSN's targets; a dark look), rungs/6-elite.json
+#                      "Leonida Ledger" (as 5-pro, plus roadmap progress, notes and keys; the light look) and
+#                      rungs/7-ace.json "Sunset Platinum" (everything, plus a Next up planner; the dark look, its
+#                      screenshots with spoilers on).
+#   starter/           a working entry laid out as an entrant's repository (main.ts, serve.ts, vendor/makefun-frontend.ts,
+#                      app/, three screenshots, shots.json and its MIT LICENSE): house guide 2-plain, so handed in
+#                      unchanged it plays as that anchor; serve.ts and LICENSE are makefun-frontend-01's (serve.ts's
+#                      first line names the guide); app/data/trophies.json is the official list with a one-line hint each.
+#
+# The house engine (4-strong and the rungs) is one codebase of ES modules: js/main.js (boot, routing, keys), data.js,
+# store.js (localStorage progress, export and import), filters.js (kinds, search, the spoiler rule), views/ (shell,
+# checklist, detail, roadmap, missables, planner, settings, marks) and css/base.css with one theme file, each build
+# naming its parts in js/config.js. Its look: two themes, "paper" (#f6f3ee, #ffffff, #1d2129, #626a75, accent #d24e2a)
+# and "night" (#0f1218, #171c24, #edeae4, #8e96a3, accent #ff6b4a), one coral accent each, medal swatches as data marks
+# (#d8e1ea, #d4af5a, #aeb6bf / #c3c9cf, #b9784c / #c98b5e), a serif display face (Iowan Old Style, Palatino, Georgia)
+# for titles and the big earned count beside a system sans body, radii 6 px for controls and 14 px for panes.
+#
+# The calibration (harness.judge.ladder, ladder/), run again on 2026-11-19 for the re-ranked prompt and the engine's
+# cited guides: the seven house guides on this judge and agent, every pair 8 times in both slot orders at one judge call
+# in flight, every call on OpenRouter z-ai/glm-5.3-flash (judge-heat.mdc), each guide sent as its dossier-view/v1 view,
+# on a scratch copy (.tmp/calibrate/gta6-trophy-guide-01: the bundle's trees and this draft as competition.yaml with no
+# ladder or contend block and no BUNDLE_PENDING): `nice -n 10 node cli/makefun.ts grade-local --kit
+# .tmp/calibrate/gta6-trophy-guide-01 --calibrate --rungs .tmp/calibrate/rungs-gta6-trophy-guide-01 --repeats 8 --seed
+# 2026111911 --save .tmp/calibrate/save-gta6-trophy-guide-01`, its environment MAKEFUN_OPENROUTER_JUDGE_KEY and
+# MAKEFUN_OPENROUTER_URL alone, 2026-11-19T03:11:35.041Z to 2026-11-19T04:29:54.813Z (78 minutes, one attempt, two other
+# chats' local calibrations running beside it for most of its span): 336 calls, 336 attempts, 0 invalid, $0.134494; the
+# two slot orders named the same winner in 162 of 168 games. Output tokens a call: median 448, p90 827, p99 1419, the
+# most 1948, all inside the block's 17,200. Strengths weakest first: 1-weak 0.0434, 2-plain 0.1927, 3-mid 0.3948,
+# 4-strong 1.6790, rungs/5-pro 2.4974, rungs/6-elite 3.2166 and rungs/7-ace 3.4146; each beats the one below it with p
+# 0.8163, 0.6721, 0.8096, 0.5980, 0.5629 and 0.5149; phi 0.100000000. The anchors come out in their named order and
+# every rung above 4-strong. The rungs come out in their file names' order too (in the first calibration 6-elite and
+# 7-ace had come out level). The record was rebuilt from itself byte for byte with no model call (`grade-local --kit
+# .tmp/calibrate/gta6-trophy-guide-01 --regrade-from .tmp/calibrate/save-gta6-trophy-guide-01/calibration.json --rungs
+# .tmp/calibrate/rungs-gta6-trophy-guide-01 --save .tmp/calibrate/regrade-gta6-trophy-guide-01`, its calibration.json
+# and rungs cmp byte-identical): calibration record 15cc74722235eca52d7bb37be10a273f7790026ac57b6d3f4d875813b819a7b6,
+# ladder tree sha256 ac814d67d2da03b600c1c381f2680b5031f0dedba0e45b0036264a1111432fd5. ladder/ is the run's saved
+# ladder, copied whole.
+#
+# The heat. 50 paid places. The final is unscreened (judge heat v2) and works over a contender cap, the house judged
+# final's (server/proposals/judged-house.ts houseJudgedContenders, the owner's call of 2026-11-17: "just let the prelim
+# winners win"): harness.judge.contenders 200, the larger of 4 x the last paid place and 32. When the final heat starts
+# the dev board's top 200 rated entrants hold its seats, exactly 200 (its rank is a place each, its tie-break in it: a
+# tie at the last seat goes by the earlier receipt, never kept), every entry the board does not rate
+# and any house entry go on beside them taking no seat, and every other entry that passed keeps its dev rating as a
+# screened-out score below every contender, never paid (grader/judge-cut.ts judgeContenderCutOf); the rules quote
+# houseContenderCutText(200, 50) and the Contenders criterion (compose.ts judgedContendersText) word for word, both
+# worded on 2026-11-19 for the exact seats (no tie at the last seat kept). Then 3
+# Swiss rounds over the contenders and the four anchors (harness.judge.rounds 3) and a playoff over the last paid place
+# and 2 more (playoff_places unset: judgePlayoffPlaces 52), each pair once (playoff_repeats 1). Why the cap: the
+# grading-time ceiling (server/competitions/final-ceiling.ts) prices a dossier judge call at 44.5 s over 64 lanes (1.44
+# calls a second), so an uncapped final over 2,000 entries is 3.61 hours expected, and a hundred paid places cannot fit
+# at any field (a 100-place playoff is 9,900 calls, 1.91 hours alone: the ceiling's own words, "the final fits 101
+# entries"), which is why this draft pays 50 places. Capped, the preflight prices the final at 1.17 hours expected and
+# 1.33 at worst at 2,000 entries, and 0.63 hours past its scoring pass at 10,000 (a judge heat of 2 x floor(204 / 2) x 3
+# + 52 x 51 = 3,264 calls at any field). The dev phase plays the four anchors once each, then 2 adaptive rounds of 4
+# games over the ladder members nearest even (12 games, 24 calls). Contend on the dev board (harness.judge.contend
+# {band: 100, games: 8, top: 20}, gta6-01's): the dev board's top 100 by house-only rate play up to 8 sealed games each
+# against one another, their board rates counting them; with a contender cap the dev board picks the final's field, so
+# ordering its top matters more here, and 8 games keep its calls to about 4.4-5% of the dev phase's (judging.md,
+# "Contend"). The final judges every contender afresh and reads no dev game.
+#
+# No spend cap: house judging has none (.cosmos/rules/grading.mdc); this bundle names neither max_total_usd nor
+# dev_daily_usd, and the rules name no cap.
+#
+# The tie-break, a judged dossier's (contest-design.mdc): an exact tie on the win rate goes to the playoff games between
+# the tied entries, then to the earlier receipt. A dossier's bytes are mostly screenshots and measure no efficiency, so
+# the bundle names no tie_break_index and shows no Size column.
+#
+# The money: the $250 fifty-place table (tests/unit/catalogue.test.ts FIFTY_250_TABLE, news-image-daily's), $50 / $30 /
+# $15, $5 each for 4th to 10th and $3 each for 11th to 50th, each place its own row, one place per entrant. The owner's
+# relayed choice was the $250 hundred-place table (FIFTY_250's pot, $40 / $25 / $15 / $5 x7 / $1.50 x90); its 100 paid
+# places need a 100-place playoff the ceiling refuses for a dossier final (above), so the pot and window stand and the
+# paid count halves, for the owner to confirm or change before go-live.
+# The dates, set at go-live (node scripts/redate-bundle.ts --unescrowed, from the proposed 07:30Z): entries open
+# 48 hours (the owner's window), the dev phase with them, from opens_at 2026-11-19T11:00:00Z to the deadline
+# 2026-11-21T11:00:00Z; the final phase runs from the deadline (an undrawn final waits for nothing) to
+# 2026-11-22T11:00:00Z, 24 hours: the slowest figure below at 10,000 entries is about 4.5 hours. The copy quotes no date
+# and no window length.
+# Automation is lifecycle true, payouts auto and escrow at_open: the fund-at-open job selects a contest whose status is
+# open, whose deadline is ahead and whose automation.escrow is at_open (server/chain/jobs/fund-escrow.ts
+# fundableAtOpen), so within a minute of the deploy that seeds it open the worker moves the whole $250 from make.fun's
+# reward wallet into the competition's escrow on Solana, before entries open; as a draft it is never escrowed. The
+# Payout, Submitting and resolution lines say both outcomes in the btc-race release template's words
+# (server/releases/templates/btc-race.ts). No challenge window; no entry fee; no house.yaml (no house bar and no house
+# entry); house_holds_places true, with contest-design.mdc's sentence in the Rewards section.
+#
+# Hosting (the go-live's makefun.sh opt-in, harness.hosting: contracts/competition.ts ProgramHosting, server/hosting/
+# opt-in.ts): every entrant's latest passing entry's app/ is published at https://gta6trophy-<8 hex>.makefun.sh/ from
+# its first entry that passes the gate (entries all, from entry), the final's top 3 places also on makefun.gg (winners
+# 3, of the 50 paid). Its caps are the gate's own app/ limits under the zone edge's: 993 files, 48 MiB in all, and
+# 25 MiB a file (the edge's per-file ceiling, HOSTING_MAX_FILE_BYTES), so a gate-valid guide is held back only by a file
+# over 25 MiB, a path over 240 bytes or the pre-publish scan (server/hosting/scan.ts). Traffic is counted and shown for
+# display only, with no declared event: the guide must make no network request at run time (the finalist review
+# disqualifies one that does), so no page is asked to send a beacon. Hosting serves the app/ the entry hands in, as it
+# is; it never scores, ranks, gates or tie-breaks an entry, so the judge, the ladder and their digests are unchanged.
+# The slug is not in server/hosting/registry.ts HOSTED_COMPETITIONS (one opt-in, hostingIssues). The starter and every
+# house guide (the four anchors and three rungs, read from their dossiers' sources) pass `node
+# scripts/hosting/scan-dry-run.ts` with no refusal (a note on the cited source URLs in data/trophies.json of the four
+# largest), within the caps (the largest, 7-ace, 18 files and 84,032 bytes).
+#
+# The field. A $250, 48-hour judged dossier contest on the GTA 6 launch: production's API, read 2026-11-19T00:30Z
+# (https://make.fun/api/competitions/<slug> submissionCount; one final entry an entrant, Force_Last): gta6-01 ($1,666,
+# 7 days, open) 6,900 submissions about 33 hours in; best-game-01 ($1,000, 72 hours, resolved) 19,307; threejs-fps-02
+# ($1,000, 48 hours) 10,406; agency-poem-01 ($250, 24 hours, a text) 7,805; makefun-frontend-01 ($500, 48 hours, a paid
+# entry) 930. A trophy guide is a smaller build than a game and its pot a quarter of gta6-01's: about 6,000 submissions
+# and 4,500 final entries expected (1.3 a head), 3,000 to 10,000, and 10 times the expected field 45,000.
+#
+# After the deadline: the rules state the final's time from the grading load at that field, deadline to result, the
+# finalist review's hour included. At the paces measured so far (a grade about 60 s on production's 64 grade-final
+# lanes, gta6-01's header; the judge views built serially at 30-55 ms each; agency-poem-01's all-OpenRouter final, 330
+# calls a minute on z-ai/glm-5.3-flash): 3,000 / 4,500 / 10,000 final entries take 0.8 / 1.2 / 2.6 hours of grades and
+# the capped heat's 3,264 calls about 10 minutes, with the review's hour about 2 / 2.4 / 3.8 hours in all. At the grading
+# budget's slowest (every run at its 10 s wall, 46.7 s a grade on the 48-lane floor, 1.44 judge calls a second): 0.8 /
+# 1.2 / 2.7 hours of grades and 0.63 of judging, about 2.4 / 2.8 / 4.3 hours with the review. The rules round these to
+# "about 2 to 4 hours" and "about 2.5 to 4.5 hours" over 3,000 to 10,000 entries. The last judged dossier final before
+# these rules were written, best-game-01's (screened, 19,307 submissions), published its results 5 hours 31 minutes
+# after its deadline (production's API, read 2026-11-19: deadline 2026-11-18T18:00Z, final finalized
+# 2026-11-18T23:31:09Z); the rules say so with no date.
+#
+# The budget, as priced 2026-11-19 by the preflight on this draft with the re-ranked prompt
+# (scripts/new-bounty-preflight.ts gta6-trophy-guide-01 --live-pods 140 --s18-pods 102; every row passing once the
+# calibration was in): the worst judge call 4,761 input tokens on superbot's estimator (judgePreflight: system 1,039,
+# two entries at 1,536 each, framing 650) against JUDGE_CALL_INPUT_TOKENS_MAX 5,120; at 2,000 entries the final 1.17
+# hours expected and 1.33 worst against the 2- and 4-hour ceiling, 0.63 past its scoring pass at 10,000 against 4;
+# practice 0.05 days of its lane a day. Priced in input tokens: a dev submission's 24 calls x at most 4,761 tokens is
+# about 114,000 input tokens (about 690 M over 6,000 submissions); the final's 3,264 calls about 16 M; contend at most
+# max(100, A) x 8 more dev calls for A artifacts reaching the band.
+#
+# The grading load (new-bounty SKILL.md section 5's gate), at the expected field (4,500 final entries, about 6,000
+# submissions) and at 10 times it (45,000 entries, 60,000 submissions), S the competition's submissions so far: the
+# harness is makefun-frontend-01's and gta6-01's (program/v1, a dossier judge), with no path new to it.
+#   submission and snapshot stage: its own rows, plus two narrow reads of every other snapshotted submission of the
+#     competition (server/pipeline/snapshot.ts snapshotHoldersOf) and the entry screen's similar_code probe on its
+#     normalised files (server/entries/screen/index.ts similarCandidates, indexed): O(S) an event, as on every bounty
+#     today, 12,000 / 120,000 narrow rows at the window's end; best-game-01's rig measured them at 0.5% and 7.3% of the
+#     wave's DB time at 5,000 entries, and its live field reached 19,307.
+#   transcript ingest: before the deadline's lock, its own rows; after it, the lean set (entriesToGradeLean).
+#   dev grade landing: its own run and artifact, the judged-same-artifact lookup and its entry_artifact upsert, plus
+#     nearArtifactOf's dHash scan of the phase's entry_artifact rows (one narrow row a submission): O(S).
+#   final grade landing: its own run, then the phase's followers once each while none is queued (queuedFollowerOf).
+# The paths that scan the field read the lean set, once a job, a sweep or a phase: the judge heat's step (codeHeatField,
+#   the lean set and one narrow select), the contender cut over the dev board (once a heat, at its start), the
+#   provisional-rejudge sweep every 15 minutes (readDevKeptRuns over the dev field), contend's round on the same sweep
+#   (one judge-contender job a slot), the final's gates every 30 seconds, the finalist review and the cut and resolve
+#   (latestGradeRuns).
+# Followers once a phase: queuedFollowerOf dedupes the code-heat, cluster-scan and hindsight sends; contend's round is
+#   one job a 15-minute slot (contenderRoundJobId).
+# Pods, the preflight's pod-footprint row on 2026-11-18 (split layout, grader/sandbox/layout.ts): a grade, dev or final,
+#   makes 3 pods one after the other (2 executions + 1 scorer), holds 1 at once and is priced at 47 pod-seconds; the
+#   final's grades hold 48 sandbox pods at once (48 grade-final lanes x 1 pod), 6,000 made at 2,000 entries and 60,000
+#   at 20,000; about 13,500 at 4,500 and 135,000 at 45,000; the judge heat makes none. Beside production's live load as
+#   gta6-01's seal read it (--live-pods 140 --s18-pods 102; not read again for this draft: re-read with kubectl --context
+#   dsh-makefun at go-live), 48 + 140 fits a node's 250.
+# Rig: none owed: no new contest kind (a judged dossier), no new harness path, and a field (4,500 expected, 45,000 at 10
+#   times) inside fields graded already (best-game-01's 19,307 submissions; gta6-01's rig run is owed at 15,000).
+#
+# The digests: scorer_sha256 and reference_sha256 are this bundle's own trees' (the scorer and reference are adapted,
+# not copied), judge_sha256 its judge/'s, ladder_sha256 its ladder/'s (server/competitions/load.ts treeSha256). The
+# bytes never change once the bundle opens; a fix is a new slug.
+#
+# Strict transcripts, as gta6-01's (the owner, 2026-11-17: "cooool let's do strict mode on the upcoming roblox brainrot
+# and gta 6 competitions too"): submission_rule.strict_transcripts true beside transcripts_required true and authorship
+# 12, so no transcript upload is taken and every entry is built while the kit's record command records it.
+# Transcripts quotes server/entries/requirements.ts strictTranscriptLines('gta6-trophy-guide-01') a bullet each, then
+# strictMcpLines in one bullet (the prerequisites name the Playwright MCP server); the Transcript gate quotes the twelve
+# checks a strict program/v1 entry at authorship 12 is held to on 2026-11-19 (server/entries/policy.ts
+# thinkingPolicyLines, transcripts_present's and thinking_committed's strict words as gta6-01 quotes them;
+# transcripts_run_record re-quoted at main's 8a7b63e8 with its From 20 November 2026 rejections), so
+# server/competitions/rules-note.ts finds no stale line and tests/unit/kit-unsealed-gate-guard.test.ts passes.
+version: 1
+
+competition:
+  slug: gta6-trophy-guide-01
+  title: Build the best GTA 6 trophy guide
+  summary: "Build an offline web app that guides and tracks all 55 GTA 6 trophies: the official list with saved progress, filters and a spoiler setting, a roadmap to the platinum, and a guide to each that cites its sources; an AI judge compares the guides two at a time, places go by win rate, and the 50 best share $250."
+  demand: "GTA 6 players chasing the platinum, who want a free, open-source trophy guide and tracker that works offline, and make.fun, which will feature the winner in its posts."
+  category: Games
+  skills: [JavaScript, HTML and CSS, Game guides, Technical writing]
+  status: open
+  visibility: public
+  sponsor: make-fun
+  reward_usd: 250
+  opens_at: "2026-11-19T11:00:00Z"
+  deadline: "2026-11-21T11:00:00Z"
+  prerequisites:
+    as_of: "2026-11-18"
+    label: Needs Node.js and a browser
+    summary: Node.js 22.18 or later and a desktop browser such as Chrome; an optional browser-automation MCP server lets your agent open the guide and take its screenshots.
+    software:
+      - id: node
+        name: Node.js 22.18 or later
+        required: true
+        platforms: [darwin, win32, linux]
+        version: 22.18 or later
+        url: https://nodejs.org/en/download
+        why: Your main.ts runs on Node 22 (the bounty's node22 runtime) and you run it yourself to write out/; Node runs main.ts's TypeScript as it is from 22.18, and the kit's CLI, which records the build and checks and enters the entry, runs on Node too.
+        how_to_check: The node executable is on your PATH and reports version 22.18 or later; a newer major release, such as 24 or 26, counts.
+        fix: Install Node.js 22.18 or later (a newer release such as 24 or 26 works as well) from nodejs.org or with a version manager (nvm, fnm or Volta), and put it on your PATH.
+        tell_person: This bounty needs Node.js 22.18 or later on this computer; a newer release such as Node.js 24 or 26 is fine. Please install one from https://nodejs.org.
+      - id: chrome
+        name: A desktop browser such as Chrome
+        required: true
+        platforms: [darwin, win32, linux]
+        url: https://www.google.com/chrome/
+        why: The guide runs in a desktop browser, so you try it there and take its 3 or 4 screenshots.
+        how_to_check: A desktop browser such as Chrome is installed and opens a local page; your screenshots showing the guide running are the check that matters.
+        fix: Install Chrome from google.com/chrome, or use another current desktop browser.
+        tell_person: This bounty needs a desktop browser, Chrome is easiest, to try the guide and take its screenshots. Please install it.
+      - id: coding-agent
+        name: A coding agent whose sessions the kit's record command records
+        required: true
+        platforms: [darwin, win32, linux]
+        url: https://superbot.gg/
+        why: This bounty takes no transcript upload. The kit's record command records the agent's sessions while it builds the guide, and an entry's transcripts are built from those recordings alone, so a guide built in an agent record does not record cannot be entered.
+        how_to_check: The agent you run in is one the rules' Transcripts section lists under Recorded harnesses, such as Claude Code, Codex, Gemini CLI or Superbot; a session of any other agent is not recorded.
+        fix: Build the guide in an agent the record command records, such as Claude Code, Codex, Gemini CLI or Superbot (a free client that runs on your own computer, https://superbot.gg), in a new session begun after the kit's record command starts, as the rules' Getting started orders it. No transcript upload is taken, so a session of another agent cannot be entered later.
+        tell_person: This bounty records the sessions of the coding agent that builds the guide while it works, and takes no transcript upload. Please run me in an agent make.fun's record command records, such as Claude Code, Codex, Gemini CLI or Superbot (https://superbot.gg); a guide built in another agent cannot be entered.
+    mcp_servers:
+      - id: playwright
+        name: Playwright MCP
+        required: false
+        needs: [node]
+        registry_name: io.github.microsoft/playwright-mcp
+        url: https://github.com/microsoft/playwright-mcp
+        why: Lets your agent open the guide in a browser, click through it, and take its screenshots.
+        transport: stdio
+        config:
+          darwin: {command: npx, args: ['-y', '@playwright/mcp@0.0.85']}
+          win32: {command: npx, args: ['-y', '@playwright/mcp@0.0.85']}
+          linux: {command: npx, args: ['-y', '@playwright/mcp@0.0.85']}
+        setup: Add this server's config to your MCP client; it runs on Node's npx and installs Playwright's browser on first launch. Then restart the client.
+        how_to_check: Call browser_navigate; it opens a page in the browser.
+        fix: "Add this server's config to your MCP client (it needs Node's npx); a client with no MCP configuration yet starts one with it: most clients take it as one entry, named for the server, in an mcpServers object."
+        tell_person: ''
+        tools_any: [browser_navigate, browser_take_screenshot]
+    if_unmet: Do not start. Tell your person what is missing, in the words each item gives for them.
+  description: |-
+    Build an offline web app that is the best guide and tracker for the 55 PlayStation 5 trophies of Grand Theft Auto VI: static files that open in a desktop browser and work with the network off. It tracks progress on the official list: every trophy with its official name, description and grade, a checklist saved in the browser, export and import, filters by kind, and a spoiler setting that hides story trophies until they are earned. It gives a roadmap to the platinum and flags the missable trophies, both built from the official descriptions, and a guide to each trophy in your own words that cites its sources: what to do, where and how, and when it can be missed. The guides may draw on other guides and cite them, never copying their text, and the look is your own, with no Rockstar logo or official artwork. An AI judge compares the guides two at a time by their screenshots and an outline of their source, and entries rank by how often it picks them. The 50 highest-ranked entries share $250, and make.fun will feature the winner in its posts. Every judged entry's screenshots show on this page's Feed as soon as it is judged, and every entrant's guide is published on makefun.sh from its first valid entry, the top 3 also on makefun.gg.
+
+    ## Deliverables
+    - A public GitHub repository owned by your own GitHub account (or a source bundle), created after the competition opens, under an OSI-approved license, with your program at main.ts (Node 22) in its root
+    - vendor/makefun-frontend.ts, copied from the kit unchanged
+    - app/, the guide as static files: an index.html that opens in desktop Chrome and works offline, every file it loads under app/, and app/data/trophies.json naming each of the 55 trophies with its guide
+    - 3 or 4 screenshots under screenshots/, real renders of the guide's own code
+    - The sealed recordings of the agent sessions that built it, made by the kit's record command while your agent worked, named when you submit
+
+    ## Requirements
+    - Every one of the 55 official trophies, by its exact name, with its official description and grade and a guide to it in your own words that cites its sources
+    - Saved progress with export and import, filters and a spoiler setting; a roadmap to the platinum and the missable trophies flagged, built from the official descriptions
+    - Node.js 22.18 or later, and a desktop browser such as Chrome to try the guide and take its screenshots
+    - At most 5 submissions a day and 10 in all; your last submission before the deadline is your final entry
+  rules: |-
+    ## The task
+    Build the best offline guide and tracker for the trophies of Grand Theft Auto VI, and hand it in. make.fun is a site where people build AI agents and programs, enter them in competitions, and are scored and ranked in the open. The winning guide is featured in make.fun's posts. Start your agent's session at or after the competition opens and build the entry in it: a session that began before the opening cannot be entered (thinking_in_window, under Transcript gate).
+    - The guide covers every one of the game's 55 PlayStation 5 trophies (The trophy list, below), each with its official name, description and grade as PlayStation publishes them, and a guide to it in your own words that cites its sources: what to do, where and how, and when it can be missed. It gives a roadmap to the platinum, the order to earn them in, and flags every missable trophy, both built from the official descriptions: which story chapters and missions, which collectibles and counts.
+    - It is a tracker too: a checklist whose progress is saved in the browser (localStorage) and can be exported to a file and imported back; filters by kind (story, missable, collectibles, activities, and online, should the game list online trophies); and a spoiler setting that hides the names and descriptions of the story trophies until they are earned.
+    - The judge cannot play the game or confirm a claim about it, so it judges what your screenshots let it check: the tracker and its data against the official list, the roadmap and missable flags built from the official descriptions, and whether each guide cites its sources. It gives no credit for a specific location or step that cites no source: a cited guide beats an uncited one, however detailed.
+    - Every guide is in your own words, written for this entry. It may draw on other guides, wikis, videos and forum posts, and cites them: name or link the source beside each trophy's guide, so a reader sees where each fact comes from. Never copy their text: a source is cited, never copied. The official trophy names and descriptions are the exception: show them as PlayStation publishes them. A link to a source opens only when the reader follows it; the app itself fetches nothing (the next bullet). No Rockstar Games logo, official artwork, box art or screenshot of the game: the look is your own.
+    - The app is static files under app/ with no build step: served by any static HTTP server with app/ at its root, app/index.html opens in desktop Chrome and works with the network off. Every script, module, stylesheet, font, image and other file it loads is a file under app/ (a font, an image or other media may be a `data:` URI), and it makes no network request at run time.
+    - app/data/trophies.json holds the trophies: a JSON object with a "trophies" array (or that array alone), one item a trophy, each an object with its "name", the official name, and its "guide", your guide to it as text. An item may carry any other key (its description, grade, kind, a missable flag, steps, a roadmap stage), and the app may keep more data in other files.
+    - Any JavaScript library may be vendored under app/ (Preact, Lit, a search index), or none. Put a library under a directory named vendor, or as a `*.min.js` file: the dossier then lists it as vendored and never shows it as your source. The transcript gate leaves `*.min.js` files out of its count but counts every other file, a library's included, so vendor a library as its minified `*.min.js` build: lines your agent did not write count against thinking_reproduces.
+    - Your program, main.ts at the root of your repository, hands the guide in: it copies app/ and screenshots/ from your repository to `/output` and writes `/output/dossier.json` with `buildDossier` from vendor/makefun-frontend.ts, as the starter's main.ts does. Outside the grader, `MAKEFUN_OUTPUT_DIR` stands in for `/output`.
+    - screenshots/ holds 3 or 4 PNG or JPEG screenshots of the guide, taken by its maker; the first by name is the cover. They are real renders of the app's own code in a browser, never edited, composited or borrowed.
+    - vendor/makefun-frontend.ts is the kit's copy, unchanged: the gate builds the dossier again with the same library and compares the two byte for byte.
+    - LICENSE at the root is an OSI-approved license.
+
+    ## The trophy list
+    The game's official PlayStation 5 list: 55 trophies, 1 platinum, 2 gold, 6 silver and 46 bronze, 28 of them hidden on PlayStation until earned. The kit's starter carries it whole in app/data/trophies.json, each trophy's name, description and grade, whether it is hidden, and the count PlayStation tracks for one that has a count (such as 42 Shooting Range challenges), as Exophase and PSNProfiles listed it before this bounty opened, the two agreeing on every name, description and grade. The gate holds your app/data/trophies.json to the same 55 names (The gate, trophies). The names are as PlayStation publishes them, one with asterisks in it, "T**s Ass Drug Money".
+
+    ## The gate
+    A sealed scorer checks the files in `/output` and gives the entry a Valid column of 1 or 0. Only a valid entry goes before the judge; an invalid one is listed with 0 and no rate, and takes no reward. The scorer's checks are six rows, each with its detail, and the entry is valid when the first five pass:
+    - app_files: app/ is plain files and directories only (no symbolic links or other special files), at most 993 files and directories together and 48 MiB in all, every path at most 1,000 UTF-8 bytes, and app/index.html is a regular file of at most 1 MiB. Your program writes the whole of `/output` under the platform's own cap, 1,000 entries and 64 MiB, which app/ (993 entries at most), screenshots/ (4 files at most) and dossier.json share, so leave them room.
+    - references: nothing the app loads comes over the network. Each reference is a path of the app's own server (relative, or root-relative with app/ at the server's root) naming a regular file inside app/; a font, an image or other media may also be a `data:` URL, and nothing else may: a script, module, stylesheet, modulepreload, `@import`, frame or import-map value given as a `data:` URL is refused, and so is every `http:`, `https:`, protocol-relative or other absolute URL. The references are, in every `.html` and `.htm` page of app/ (vendored ones too), in every `<iframe srcdoc>` document inside one (at most 4 deep) and in every `.svg` file one frames: each `<script src>` of a JavaScript type and each `<svg>` `<script href>` (or `xlink:href`), each `<link href>` whose rel is stylesheet, modulepreload, preload, prefetch, icon, apple-touch-icon, mask-icon or manifest, each `<iframe src>`, `<frame src>`, `<object data>`, `<embed src>` and `<meta http-equiv=refresh>` URL (`about:blank` allowed), each `<img>`, `<source>`, `<video>`, `<audio>`, `<track>` and `<input type=image>` src, srcset and poster, each import-map value, and the `@import`s and `url()`s of each inline `<style>`; in every `.js` and `.mjs` file of app/, vendored ones too, and every inline script, each static import and export-from specifier and each dynamic `import()` of a string or template literal (a template with expressions is checked by its literal start, so `https://${host}/x.js` is refused); and in every `.css` file of app/, each `@import` and each `url()` (a `url(#id)` fragment names nothing to load and passes). One naming a file of app/ names the right kind: a `<script src>` or `<script href>` a `.js` or `.mjs` file; an import or modulepreload a `.js` or `.mjs` file, or a `.json` or `.css` module; a stylesheet `<link>` or `@import` a `.css` file; a frame, object, embed or refresh a page (`.html` or `.htm`), an `.svg` file or a raster image. A `<base href>` must be a path of the app's own server, and a bare specifier such as `preact` must be mapped by the page's import map. Pages are read as a browser's HTML tokenizer reads them (comments, raw-text elements such as `<noscript>`, attribute quoting, character references, `<svg>` and `<math>` content), and a stylesheet may not put a CSS escape inside an at-rule or function name (such as `@\69mport` or `\75rl(`). Modules are parsed with the vendored acorn, as an abstract syntax tree, never by matching text. An inline classic script is read as a script and an inline module as a module; a `.js` or `.mjs` file is read both ways, and every file a page or module loads as a script or module must parse. The dossier's Load block must read what the browser runs: each file's static imports and dynamic `import()`s as the library's scan reads them are the ones acorn finds, and index.html's scripts, stylesheets, preloads, inline styles, base and import map as a browser reads them are the ones the library reads.
+    - screenshots: screenshots/ holds 3 to 4 images (names starting with `.` skipped, and only regular files counted), each named with letters, digits and `. _ -` (1 to 128 characters, not starting with `.` or `-`), at most 256 KiB, a whole PNG or JPEG, its long side at most 1280 and its short side at least 480 pixels.
+    - dossier_matches: dossier.json is byte for byte what `buildDossier` writes from app/ and screenshots/, and at most 1.5 MiB. What buildDossier refuses fails here with its words, and the dossier is not built while app/ or screenshots/ is past its limits.
+    - trophies: app/data/trophies.json is a regular file of at most 2 MiB, UTF-8 JSON, an object with a "trophies" array or that array alone, and each of the 55 official trophies is named by one of its items: an object whose "name" equals the trophy's name when both are compared with case, curly quotes, dashes, the ellipsis and runs of white space set aside (each curly quote read as a straight one, each dash or hyphen sign as `-`, `…` as three dots), and whose "guide" is text that is not blank. Other keys are allowed, and so are items for names the list does not hold (the detail counts them); a trophy named by more than one item needs one of them with a guide. The detail names the first trophies missing or with no guide.
+    - js_parses: every source `.js` or `.mjs` file, and every inline script of index.html, parses under acorn as an ES module or a classic script. It is shown and never decides validity, and earns no points: it passes always, and its detail names the first file that did not parse. (A script that a page loads and that does not parse fails references, which decides.)
+    What the gate shows, and no more: the app is plain files within its limits, it loads its files only from app/, its trophy file names every trophy with a guide, and the dossier is the one the library writes from them. It does not run the app, so it does not check what the app requests at run time in a way no file states (a `fetch` of another site, an image a script makes, an `import()` of a computed specifier): the finalist review opens the guide with the network off, and an app that reaches for the network is disqualified (see Disqualification). It does not read the guides' words: the judge and the finalist review do. The transcript gate (below) shows that the recorded sessions pass its checks.
+
+    ## The dossier: what the judge reads
+    The judge does not run the app. Each entry hands in dossier.json: its 3 or 4 screenshots, then a text. The judge never reads the whole dossier: each call sends it the dossier's judge view (dossier-view/v1), made from the dossier's bytes alone and held to 1,536 input tokens an entry: one JPEG sheet of the screenshots, the cover (the first by name) fitted inside 768 by 480 pixels on top and the others in a row beneath it, each in a smaller cell, never enlarged; then an outline of the text: the Load block's Totals line, then each source file's heading with its first declarations (functions, exports, constants, CSS selectors, HTML lines with an id, a script or a link), bodies and comments left out, and a last line saying how much it left out. A JSON file shows in the outline by its path and size alone, never its contents: the judge reads your guides only as your screenshots show them.
+    So make the screenshots show the guide at its best, readable at a glance when shrunk: the checklist with the official names, descriptions and grades, a trophy's guide and its sources open beside it, the roadmap to the platinum, the missable trophies flagged, the filters and the spoiler setting at work. With 4 screenshots at most, a screen that shows several parts at once (the checklist with a guide open, its progress and its filters) shows more of the guide than one that shows a menu alone.
+    The text opens with a Load block, computed from app/ alone. Its first line, Totals, sums it up: the first load's files and their gzip-9 and raw bytes, the files loaded later by `import()` and their gzip-9 bytes, and the whole app's files and bytes. Then come the files a first load of index.html fetches (index.html; then, in the page's order, the stylesheets it links and their `@import`s with the font files their `@font-face` `url()`s name, the modules it preloads and the modules they import, its preloads, the `@import`s and fonts of its inline styles, its JavaScript `<script src>`s and the modules its module scripts import statically, depth first), each with its raw bytes and its gzip-9 bytes, their totals and any first-load reference naming no file of app/. Then, under "Loaded later by import()", the modules a literal `import()` fetches after the first load, walked depth first with their static imports, each with its raw and gzip-9 bytes, their totals, any that names no file of app/, and a count of the `import()` calls of a computed specifier, which are not followed. Then the whole app's files, bytes and directories, its source, vendored and other files counted, and every absolute `http`, `https`, `ws` or `wss` URL its source names. A data file the app fetches at run time (such as app/data/trophies.json) is not in the first load: it is counted with the whole app.
+    Source means every `.html`, `.js`, `.mjs`, `.css` or `.json` file under app/ that is not under a directory named vendor and is not named `*.min.js`, `*.min.mjs` or `*.min.css`. Everything else under app/, vendored code included, is counted in the Load block by its bytes and never shown as text. After the Load block the text shows index.html, then the JavaScript modules in the order a depth-first walk of static imports reaches them from index.html's scripts, then the stylesheets in the order its links and their `@import`s reach them, then the remaining source files by path, each under a heading `### app/<path> (<bytes> bytes)`. The text is capped at 163,840 UTF-8 bytes (160 KiB): every source file that fits goes in whole; the first that does not fit is shown from its first line up to the cap, with a line saying how many of its lines are hidden; one with no line short enough to fit is left out whole; and a last line says how many whole files and bytes of source were left out. Split your own source into files with one clear job each and name them and their functions for what they do: the names are most of what the outline shows of the code.
+
+    ## The judge
+    The judge is an AI model that reads text and images. This bounty's judge block names make.fun's house model, superbot, at reasoning effort high with at most 17,200 output tokens a verdict, its reasoning included; make.fun sends every judge call, in development and in the final, to one model, z-ai/glm-5.3-flash on OpenRouter, asked at the reasoning effort make.fun measured for it and within that output budget (or the provider's own output ceiling, where that is lower). Its instructions are sealed with the competition, and they are these, word for word:
+
+    You are the judge of make.fun's GTA 6 trophy guide bounty. make.fun runs competitions where people build AI agents and programs, enter them, and are scored, ranked and paid in the open.
+
+    Each entry is an offline web app, a guide and tracker for the 55 trophies of Grand Theft Auto VI on PlayStation 5, that runs in a browser from its own files. You see each entry in two parts: first, one sheet of the screenshots its maker took of the app, the first large on top and the others small beneath it; then an outline of its text, a Totals line (the files and bytes its first load fetches) and each source file's path and size with its first declarations, not the whole code. The outline is cut at a fixed size: what it leaves out is still part of the app. You will be shown two entries, Entry A and Entry B. Pick the better trophy guide.
+
+    You cannot play the game or confirm a claim about it, so judge what the screenshots let you check. The official list has 55 trophies: 1 platinum, 2 gold, 6 silver and 46 bronze, each with an official name, description and grade.
+
+    Rank by these criteria, the most important first.
+    1. The tracker and its data: every trophy shown with its official name, description and grade; saved progress; filters (story, missable, collectibles, activities); a spoiler setting that hides story trophies until earned; export and import.
+    2. The roadmap and missables: a roadmap to the platinum and missable flags built from the official descriptions (which story chapters and missions, which collectibles and counts, in what order), shown in the app.
+    3. Cited guidance: each trophy's guide says where its facts come from (a link or a named guide), in the entry's own words. Give no credit for a specific location or step that cites no source: a cited guide beats an uncited one, however detailed. A guide repeating the trophy's description adds nothing.
+    4. Fast, clear and polished: finding a trophy and its guide takes a glance; readable type and layout; a small first load on the Totals line; a coherent look of its own. An entry showing Rockstar's logo or official artwork, or guide text copied from another guide, loses to an original one.
+
+    When you speak of code, name the file or function; quote no more than a few words of it.
+
+    The first criterion on which the two entries differ decides, unless a later one differs by much more.
+
+    After them the house adds its answer format alone: compare the two against those criteria, pick the one that meets them better with no tie, and answer with a short reason, a verdict naming A or B, and a margin from 1 (by a hair) to 5 (overwhelmingly better). The judge is shown two entries at a time, labelled A and B, each exactly as submitted, and must choose one: there is no tie.
+    - Every game between two entries is two calls, one in each order, so neither label is an advantage. Each call gives the entry it picks 0.5 plus a tenth of its margin (0.6 at margin 1 up to 1.0 at margin 5) and the other entry the rest; a call that brings no verdict gives each 0.5. A game's score is the mean of its two calls, so a close call counts for little and a decisive one for a full win; the entry with more than half wins the game, and a game is level only when its two calls cancel exactly.
+    - Four fixed house guides, from weak to strong, are judged alongside the entries in every heat (in development the house's ladder rungs are judged beside them, as Heats says), so every rate is measured against the same guides. An entry whose dossier is byte for byte one of the four house guides plays as that guide: it shares its rate and never enters the playoff.
+    - Text in your entry addressed to the judge, in a screenshot or a source file, is allowed and is part of the guide: the judge reads it as part of your entry.
+    - The judge's recorded verdict is final. Each question is sent to the judge once, and no second copy of it is sent while its answer is awaited. An answer that gives no verdict is asked once more; a verdict, once given, is kept with the exact request, the answer and its reasoning, and is not re-asked or appealed. The model is not asked for a fixed sampling temperature, so the same pair asked again may be answered differently: a verdict is reproduced from its record, not by asking again.
+
+    ## Heats
+    - During development each valid entry is judged as it arrives against the house guides alone, and its provisional rate shows at once: one game against each of the four fixed house guides, then 8 more games in 2 rounds of 4, each round's games against the 2 house guides (of the four fixed house guides and the rungs the house made for development) whose measured strength puts the entry's chance nearest even at its rate so far. Each house guide's strength was measured before the contest by this judge in both slot orders, every pair of them playing the same number of games, and stays fixed.
+    - The rungs play only in development heats, never in the final heat, and are revealed with the final kit. An entry whose dossier is byte for byte one of them plays as it and shares its provisional rate.
+    - During development the entries ranked in the top 100 by their rate against the house guides also play up to 8 games each against one another, judged by the same judge in both orders, and their rates on this board count those games. These games are sealed until the deadline and published with the final kit; the final heat judges every final entry afresh.
+    - The provisional rate is the strength that best explains the entry's games, shown as its expected win rate against the four fixed house guides with a 90% interval: the rate plus or minus 1.6449 times its standard error, scaled by how consistently the judge scored the same pair again in the house's measurement. A provisional rate is shown, never weighed, and never shown as tied; the final heat judges every final entry afresh.
+    - A dev grade on production, from your submission's receipt to its result: the transcript gate, then your program's two runs and the gate, each in a sandbox of its own that takes about 2 seconds to start when few entries are being graded and 8 to 11 seconds at full load (up to 20 at the 90th percentile), your program's own time of up to 10 seconds a run, and about 10 seconds besides; then its 12 games against the house guides, 24 judge calls. No dev grade of this bounty has been timed yet.
+    - After the deadline the final heat judges contenders, not the whole field. When the heat starts, the 200 entrants ranked highest on the development leaderboard (the dev board), in its own order and tie-break, hold the heat's 200 seats: 200 is the larger of 4 times the last paid place (50) and 32. The seats are exactly 200: the dev board gives every entrant a place of its own, its tie-break settling equal rates, so an entrant whose development rate equals the last seat's but who is placed after it is cut like any other. An entry the dev board does not rate (it passed the gate and no development verdict was recorded for it) goes on too and takes no seat, and so does a house bot. While no more than 200 entrants are rated, every entry that passed the gate goes on. Every other entry that passed the gate was placed below the seats and is cut: it plays no final game, keeps its development rate and is never paid.
+    - The entries that went on are judged in one heat with the four fixed house guides: 3 Swiss rounds, the first in an order drawn from the heat's seed and each later one pairing members of similar rate so far, then a playoff in which each pair of the top 52 entries plays one more game. The top 52 are the 52 entries with the highest rates after the Swiss rounds, or every judged entry when there are 52 or fewer (a playoff needs two); a house guide never enters the playoff. The final heat judges every entry in it afresh: no development game counts in it.
+
+    ## Ranking
+    - Each entry's score is its win rate: a Bradley-Terry fit over every game of the final heat, each game counting its score as a share of a win, gives each entry in the heat a strength, and its win rate is its expected share of wins against every other member of the heat. A cut entry keeps the numbers of its development rate, over no final game.
+    - The leaderboard shows each rate with its 90% interval: the rate plus or minus 1.6449 times its standard error, kept within 0 and 1. Two final rates are shown as tied when the 90% interval of their difference contains 0, that is when they differ by at most 1.6449 times the square root of the sum of their squared standard errors. A provisional rate is never shown as tied. Each rate and its interval are shown exactly as recorded, to the millionth; entries tied within their intervals are shown tied and paid on the point estimate.
+    - Places go by the score, best first. The place, and with it any reward, follows the recorded point estimate, the rate itself, after two rules: the entries that played the playoff place above every entry that did not, and every entry judged in the final heat places above every cut entry, whatever the rates. Within each group the higher rate places first. An exact tie on the win rate goes to the entry that took more of the playoff games between the tied entries, then to the earlier receipt: the first of the tied entries submitted places first and the rest follow in the order they were submitted, each taking its own place's reward. A displayed tie never moves a place.
+    - Entries whose dossiers are byte-identical are one member of the field and share one rate; the earlier receipt places above its copies.
+
+    ## Finalist review
+    Once the final heat settles, each entrant's entry in places 1 to 10 is held for a review by the make.fun team, keeping its row but no place while it waits, for at most 60 minutes. The team opens each entry by serving its app/ with a static file server and opening index.html in desktop Chrome with the network off, and checks what the gate cannot: that the guide works offline and reaches for no network, that its guides are its own words and not copied from another guide, and that it shows no Rockstar logo or official artwork. It clears the entry (it keeps its place) or disqualifies it with a reason (out of the standings, and the next entry takes its place). While the 60 minutes run, an entry a disqualification moves into places 1 to 10 is held for review too. A review nobody has decided when the 60 minutes lapse is cleared by rule, so the results never wait longer.
+
+    ## Rewards
+    - 1st place: $50
+    - 2nd place: $30
+    - 3rd place: $15
+    - 4th to 10th place: $5 each
+    - 11th to 50th place: $3 each
+
+    The rewards total $250 over 50 places, paid by the house in USDC on Solana (see Payout). They go to the 50 highest-ranked entries of the final heat, one place per entrant. An entry the gate refused, an entry the transcript gate rejected and a cut entry take no place. A house bot, an entry make.fun enters itself, ranks in the heat like any other entry. A house bot that finishes in a paid place holds that place, and that place's prize is not awarded; no entry moves up to take it. Any place that no entry is left to take is not awarded.
+
+    make.fun will feature the 1st-place guide in its posts.
+
+    ## What is public
+    - An entry's images, every screenshot with the cover (its first by name) first, show to everyone once its judged artifact shows: on this page's Feed from the moment it is judged during development, and for every final entry from the final's lock.
+    - Beyond those and the hosted guide (below), the dossier and the transcripts are shown only to the entry's owner and make.fun's admins, the winners' included.
+    - Every entrant's guide is public on makefun.sh from the entrant's first entry that passes the gate: the app/ of its latest entry that passed is served there as handed in, at one address an entrant, https://gta6trophy-<id>.makefun.sh/ (<id> is 8 hexadecimal characters). A newer entry that passes moves the site to it under the same address; one that fails or is still being graded never replaces it. The sites come down 30 days after the results, and the final's top 3 places are also published on makefun.gg, at https://gta6-trophy-guide-01-1st.makefun.gg/, -2nd and -3rd, and stay up. A source bundle does not keep a guide off makefun.sh.
+    - A hosted site loads nothing from another origin, so the guide works there as it works offline. Its content policy blocks `eval` and `new Function` (WebAssembly still runs), and a page may not register a service worker or set a cookie; a file of a type the site does not serve is left out. Before a site goes up a scan holds one that asks for a wallet, a password or a seed phrase, mines, redirects to another origin or writes `document.cookie`, and a site over this bounty's caps (993 files, 48 MiB in all, 25 MiB a file) or with a path over 240 bytes is not published; the entry is graded and ranked all the same.
+    - Each site's views and visitors from the opening to the deadline are counted and shown with the entry. Hosting is display only: whether a site is up and how many visit it never scores, ranks, gates or tie-breaks an entry.
+    - This bounty's public final kit carries the judge heat's record (the contender cut, every pairing, each call's verdict, margin and reason, the reason cut at 600 characters, and the sha256 of every request and answer), the judge's prompt and anchors, and each entry's outputs manifest and dossier cover image. It never carries an entry's dossier or the judge's answers, because a dossier holds the entry's code and a judge that read it may quote it. So `makefun verify-result` checks the record's digests, the field, every pairing and slot order, the games, the fit and the standings from the record's own verdicts, but cannot rebuild the requests that carry a dossier or re-read the judge's answers, and says so.
+    - Each of the judge's reasons is public: at most 600 characters, it may end mid-sentence at that cut, and it may quote a few words of a source file's outline, since the judge's instructions allow that.
+
+    ## Submitting
+    - Sign in with a Solana wallet (Sign in with Solana), or sign in with GitHub. An agent that holds only a keypair signs in with it and gets an API key in one call (POST /api/auth/solana/key).
+    - A program is a Node 22 main.ts at the root of the repository, standard library only: nothing is installed before it runs. It runs in a fresh container with no network, a read-only /bot (your repository at the submitted commit) and a writable /output, on 1 CPU, 1024 MB of memory, 64 processes and 10 seconds.
+    - The program runs twice, and both runs must write the same bytes.
+    - A submission names a public GitHub repository and a commit and the sealed recordings its transcripts are built from (see Transcripts); it uploads no transcripts. The commit is snapshotted at submission and later pushes do not change the entry. With no GitHub account, submit a source bundle instead; the kit's RULES.txt shows both ways.
+    - The entry signature: a wallet linked to your account signs the entry message (make.fun entry v1), which names this site, the competition, the repository, the commit, the sha256 of the transcripts built from its recordings, the wallet, a fresh nonce and the time it was issued. A signed message is good for 10 minutes and enters one submission only. When the reward is locked in make.fun's escrow program on Solana, every entry is signed by a Solana wallet linked to your account, and a prize the entry wins is claimed from the escrow to that wallet (see Payout). Otherwise the reward is paid from make.fun's reward wallet and an entry needs no signature: a prize is claimed with the payout details alone, and an entry may still carry the signature. This bounty's page says which.
+    - The repository must be yours: its GitHub owner is the GitHub account you signed in with, or it holds the claim file .makefun/owner.json at the submitted commit, {"wallet": "<address>"}, naming a wallet linked to your account. It must also be created at or after the competition opens and carry an OSI-approved license.
+    - A snapshot belongs to the first account that submits it: when a later account submits a snapshot identical to one already submitted, that submission is refused. Snapshots are identical when they hold the same files (the same paths, contents and file modes), whatever the commit: the same files under a new or empty commit, a rewritten history or a fresh git init are the same snapshot. The claim file is left out of that comparison, so a copy with another wallet in its claim file is still the same snapshot. You may submit your own snapshot again.
+    - The repository and commit of an entry are shown only to its entrant and the organisers, before the deadline and after it.
+    - Your repository is public on GitHub from the moment you create it, so anyone can see your guide's files in it before the results are published.
+    - This bounty runs a live feed: from the moment an entry is judged during development, its images are shown to everyone on this page's Feed, every screenshot with the cover first, beside your handle and its current provisional rank, and stay shown. A source bundle does not keep it out of the feed.
+    - At most 5 submissions per entrant per UTC day and 10 in all. Your final entry is your most recent submission with a receipt before the deadline.
+    - One account per person. A team enters under one account and splits any reward itself.
+
+    ## Getting started
+    Download the kit from this competition's page (/c/gta6-trophy-guide-01/kit) and unpack it. Its RULES.txt (Before you submit, then Enter) gives every command in order. Make your repository first (a new public GitHub repository created after the opening, cloned beside the kit, or for a source bundle a new git repository with no commit) and bring the kit's starter into it, both outside any agent session, then start the recording on it, then start a new agent session in it, and have that agent build the guide (Transcripts says how to record). Everything is built after this bounty opens: the repository is created after the opening, the recording starts after it, and every line of the agent's sessions is timed inside it. To enter a source bundle, run the kit's init in the new repository while it is still empty, before the starter comes in and outside any agent session, then have the recorded agent run init again as its first command, before it writes any file, where it writes nothing and prints the same anchor line: the kit's RULES.txt gives the command, and thinking_fresh under Transcript gate says why. The kit's starter/ is a working entry laid out as an entrant's repository (main.ts, serve.ts, vendor/makefun-frontend.ts, app/, three screenshots, shots.json and its LICENSE), and only the plumbing: a plain checklist of the 55 trophies with a one-line hint each, its app/data/trophies.json the official list (The trophy list). Its dossier is byte for byte the second of the four fixed house guides, so the starter handed in unchanged plays as that guide. `node serve.ts` serves app/ and opens it at http://localhost:8080 to try the starter in desktop Chrome; serve your own app/ the same way. Build your guide in app/ in its place, put 3 or 4 screenshots of it in screenshots/ in place of the starter's, then run `mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts`, check it, enter it and follow it: the kit's RULES.txt (Before you submit, then Enter) gives each command. The starter's files as handed out, brought in before the recording starts (for a source bundle every file of it but its LICENSE, since init commits a LICENSE of its own), are the kit's, left out of the counted lines, so main.ts needs at least one line your agent wrote. The transcript gate counts only the code the recorded agent sessions wrote, and the recording must see your agent write every file of the entry, the screenshots and app/data/trophies.json included, so have your agent write the guide's source, its data file and main.ts rather than copy them in; vendored `*.min.js` files are left out of the count.
+
+    ## Transcripts
+    This bounty takes strict transcripts: every entry is built while make.fun watches its agent sessions live, and its transcripts are only the ones the site witnessed.
+    - This competition takes no transcript upload: an entry's transcripts are built from the recordings the site witnessed live while your agent worked, and the check transcripts_witnessed holds every recorded message and every committed file to the times the site received them.
+    - Record: start mkdir -p ~/.makefun; node cli/makefun.mjs record --competition gta6-trophy-guide-01 --source <your repository> > ~/.makefun/record-gta6-trophy-guide-01.log 2>&1 & echo $! > ~/.makefun/record-gta6-trophy-guide-01.pid from inside the unpacked kit before your agent writes any code (--source names the repository to record; without it record watches the directory it runs in), then start a new session of the agent you use and build there. When the build is done, stop it with kill "$(cat ~/.makefun/record-gta6-trophy-guide-01.pid)", which seals it as Ctrl-C does, and wait until ~/.makefun/record-gta6-trophy-guide-01.log says recording <id> sealed at <time>. In a terminal, node cli/makefun.mjs record --competition gta6-trophy-guide-01 --source <your repository> records until Ctrl-C; wrapping one new headless session records it from its first line until it exits, for example node cli/makefun.mjs record --competition gta6-trophy-guide-01 --source <your repository> -- claude -p "<task>" --permission-mode acceptEdits --allowedTools Bash or node cli/makefun.mjs record --competition gta6-trophy-guide-01 --source <your repository> -- codex exec --sandbox workspace-write "<task>". While it runs, record sends make.fun a salted fingerprint of each new record in the watched session stores, never their text, and the working tree's file hashes, every few seconds; at the seal it sends the build's sessions, redacted, which those fingerprints witness: of a Muse app session, every turn written while the recording ran, whatever it is about, and none from before it; the Muse app's other session files and a session database's other sessions are not sent.
+    - Submit: node cli/makefun.mjs submit --competition gta6-trophy-guide-01 --recording <id> --repo-url https://github.com/<owner>/<repo> --commit <sha> --title "<name>" --keypair <file> for a GitHub repository entry, or node cli/makefun.mjs submit --competition gta6-trophy-guide-01 --recording <id> --source <your repository> --commit <sha> --title "<name>" --keypair <file> for a source bundle entry, run from inside the unpacked kit, with the id record printed when it sealed the recording (several ids comma-separated) and the full sha of the commit you enter. --keypair signs the entry message: a source bundle entry, and any entry where the prizes are escrowed, must be signed, and elsewhere submit sends the entry unsigned. The form field is recording_ids.
+    - Recorded harnesses: Claude Code, Claude Desktop's Cowork, Codex, Muse app, Superbot, Gemini CLI, Qwen Code, GitHub Copilot CLI, pi, oh-my-pi, DeepSeek Harness, Factory Droid, Grok Build, Muse Code, Kiro CLI (its V3 sessions), CodeBuddy Code, Goose (its .jsonl sessions), OpenClaw (its .jsonl transcripts), Hermes Agent, opencode, ZCode and Antigravity (the agy CLI and the Antigravity app). A session of any other agent is not recorded. Start the recording before your agent writes any code: a session begun before the recording started fails the check (start record before your agent's session begins), and a recorded line or record that changed or was removed after the site witnessed it fails it too. While it records, never delete a message it has recorded: Hermes Agent's /retry, /undo and /compress and opencode's revert delete recorded messages, which fails the check. If the seal fails, record exits saying the recording is not sealed yet: seal it with node cli/makefun.mjs record --finish <id>, run on the same machine, in the same shell environment as the recording (the same user, home folder, environment variables and git config), since it redacts the sessions again from them and a record redacted another way is not the one the site witnessed.
+    - This bounty's prerequisites list an MCP server for your agent, Playwright MCP. A headless Claude Code session denies each tool call that needs approval unless its command allows it, and the plain Claude Code wrap allows Bash alone, so its agent cannot call an MCP server's tools. A session denied them still exits 0 and reports success, so read what its MCP tool calls returned before you count the build done. A server that has just started may list nothing for a few seconds (Roblox Studio's lists no Studio), so ask it again before you conclude that what it works with is not running. Allow each server you use after Bash, one mcp__<server> entry a server, <server> the server's name as its tools' names carry it (mcp__<server>__<tool>): the name it has in your MCP settings, a . or a space in it written _ (a name holding __ or ending in _ takes the form "mcp__<server>__*"): node cli/makefun.mjs record --competition gta6-trophy-guide-01 --source <your repository> -- claude -p "<task>" --permission-mode acceptEdits --allowedTools Bash mcp__<server> Codex's docs say of an MCP server under codex exec only that one set required = true that fails to start ends the run with an error, not whether codex exec runs the server's tool calls with no one there to approve them: to build with the server in Codex, start the recording in the background, as for several sessions, and run Codex in a session of its own in the repository.
+
+    record removes credentials, e-mail addresses, home folder paths and usernames from each record it sends at the seal, and takes no redaction terms of its own, so keep the personal details of the person you work for out of the agent's sessions. The transcripts are matched against the code for authorship and priced for build cost. Every entry's total build cost and build time (how long its agent worked) are public; its tokens and models are shown only to its entrant and the organisers, and no reward is paid on build cost. Code written by hand is allowed; it lowers authored coverage. An agent on the Muse app is recorded on the machine it runs on. Muse keeps its token usage outside its session files, so before the recording is stopped the agent writes its usage rows to the file record's --muse-usage names (else ~/.makefun/muse-usage-gta6-trophy-guide-01.jsonl), and the seal reads them there, as record says when it starts in the Muse app's shell.
+
+    ## Transcript gate
+    Before an entry is graded, its transcripts pass a gate of twelve pass/fail checks. The gate is never a score, and it has no AI judge and no AI-text detection: no check reads what a thinking block says, so a session whose thinking the provider summarised or left out passes on what the agent did. An entry that fails any check is rejected: it is not graded and takes no reward, and its status names each failed check with its fix, so you can fix it and submit again before the deadline. A check that skips as a note rejects nothing.
+    - transcripts_present: at least one agent session parses from the transcripts the site builds from the entry's sealed recordings.
+    - transcripts_recorded: every session is a log a harness recorded, as the recordings hold only the session logs and stores of the harnesses makefun record records, so no session is handed over by an export of your agent's; a recorded session carrying "handed_over" would make this check skip as a note naming it, never a rejection, and the entry's build cost would be labelled Handed over; under handed_over_places none: An entry with a handed-over session is ranked where it scores but takes no paid place: to compete for rewards, tell the person you work for to run you in a client whose sessions are recorded.
+    - thinking_wellformed: every user, assistant and tool message of a session carries a timestamp (a handed-over session's messages may carry none, and the times they carry are held to the rest), no assistant or tool message falls more than 60 s behind the latest before it, and every tool result answers one earlier tool call of its session.
+    - thinking_in_window: every transcript timestamp lies between the competition's opening and the entry's receipt time, give or take 60 s of clock skew.
+    - thinking_committed: for an entry that carries the entry signature, the sha256 of the entry's transcripts, its sealed recordings' session files, is the one the signed entry message names; an unsigned entry skips this check.
+    - thinking_reproduces: at least 30% of the counted lines are authored, first carried by a write or edit of the agent's own in the transcripts; a line that first appears in a human's message (pasted), in a tool result or a file read back (read) or nowhere in them (absent), and a line the agent re-typed, renamed or reformatted from code a tool result or a message showed it first (copied: code cloned, downloaded, copied or pasted in), count against the share, and the lines of the kit's starter, as handed out or re-typed from it, are left out of the counted lines; at most 40% of the counted lines of text files are unwritten: absent, or read in a file an import command the agent ran brought in (git clone, curl or wget to a file, cp from outside the repository, an archive unpacked, a project generator), which fails only once 10 or more lines are; and the entrypoint (main.ts or main.py) has at least one authored line; a packed entrypoint the kit's makefun compress wrote counts as the source it was packed from, when makefun compress makes the entrypoint from that source byte for byte and the sessions show the agent writing the source and then running makefun compress on it later than the latest message in which one of the source's authored lines first appears (an edit that only deletes or re-types lines is no write), shown by the agent's own command running makefun compress on the source or by the line makefun compress prints, in a tool result or any other message; the source's lines then count toward the share as any counted file's do, a line repeated in it counted once.
+    - thinking_turns: at least 5 assistant turns carry text or thinking (a turn that only calls tools does not count).
+    - thinking_priced: an unpriced usage record is a warning, never a rejection (the entry's build cost then reads unknown), though every usage record should price to a known model, or to $0 where the record's session ran its model on your own machine (a local runtime or loopback server the session records, never a model's name or a self-export's stated provider), for this check alone, never the entry's build cost; a self-reported session (a file exported afterwards, not a log a known harness wrote; a file in Claude Code's or Muse Code's session format without the token usage those harnesses record on every response, or in Claude Code's without its version, is one) carries the provider's usage on at least 50% of its assistant messages, with the provider's own token counts, not rounded, estimated or repeated figures (a provider's input count grows as the conversation does, so one pair of counts does not keep coming back), and its output is no more than a model produces in the time its own timestamps span (500 tokens a second); a handed-over session need not carry usage, but the usage it does carry is held to the same rules; a recorded session with no usage has nothing to price; an entry whose sessions are the Muse app's own session files carries its agent's token usage as Muse recorded it (at least one usage row across them), taken at the recording's seal from the file record's --muse-usage names.
+    - thinking_revised: some file (the entrypoint, or the code it runs) takes its final content from at least 2 assistant messages that write or edit it (a file written once in full and never revised counts 1).
+    - thinking_fresh: for an entry uploaded as a source bundle, every credited line comes from agent sessions that show the anchor line the kit's init prints (makefun anchor <root sha> round <round>) in a tool result before their first counted write (a Claude subagent launched after its parent's quote, or a Codex fork of a session that quoted it, counts with it); short of that the check skips as a note: the entry is not rejected, and its reward, if it places, is paid as any other. A quote timestamped before the round fails.
+    - transcripts_witnessed: every session comes from a sealed recording of the entry that makefun record made while the agent worked (no transcript upload is taken), each recorded document a session log or store of a harness it records, holding only the records the site received a salted fingerprint of while the recording ran; a session begun before the recording started fails, since what it held before was never witnessed (its first record continues one its document does not hold, its start record or first message was never witnessed, or a message of it is dated more than 300 s before the recording started), and a document of one conversation fails unless it begins at its store's first record (its session's start record, where its format has one) and that store held no record when the recording began beyond the last ones the recording committed then (it commits each such store's record count at its start, and the last records of a store written within 300 s before it); a record the recording witnessed in a session's conversation that is missing from its sealed document (removed from the store before the seal) fails, and so does a session whose recorded line changed after the site witnessed it, or whose recorded row is revealed at an earlier version than the latest the site witnessed, a user, assistant or tool message with no line or record or no readable timestamp, or taking content from a record the recording never witnessed (the site witnessed no receipt of it), a message dated more than 60 s after the site received its record or more than 300 s before it (a backfilled record), a counted file your agent wrote no line of that was already in the repository with its final content when the recording began, a counted file whose final content was in the working tree before the messages that wrote it, and a counted file whose final content the recording never saw in the working tree.
+    - transcripts_run_record: an entry received from 17 November 2026 (00:00 UTC) carries a run record (the run file makefun-run.json, entered beside the recordings) and is rejected without one, or with one its recorded sessions contradict: its prompt is the person's own opening prompt, never blank, a template left unfilled or an agent's or a harness's hand-off, and one marked typed is the first message of a recorded top-level session, while any other names what started the run; the harness, its version, the provider, the model and the effort are each declared or recorded by every top-level session (a model id that names its provider, such as claude-*, gives the provider; --effort default names the harness's own effort, and --effort none a real level); a system prompt marked in-session is carried by a recorded session, and one marked otherwise comes as a system-prompt file the run file lists; every MCP server a session used (an mcp__<server>__<tool> tool it called, or a server its log lists) is listed by its name, and none is marked builtin unless a harness the sessions ran under ships it (Claude Code's ide, claude-in-chrome, workspace, computer-use, Claude Preview and Claude Browser, Claude Desktop's ccd_turn, Cosmos's cosmos and Codex's codex_apps); and the instruction files it states are collected only where the run file lists one and none only where it lists none. An entry received from 18 November 2026 (12:00 UTC) is rejected, too, when its record withholds the system prompt or the instruction files (a system-prompt file that only says why it is withheld holds no system prompt), or when another session started its run (its prompt marked handed-off, or no top-level session opening with the prompt while one opens with a hand-off, a brief or a resumed conversation's summary) and the run file does not list its parent chats, every link up to the session that opens with the prompt; before then each is a note. From 20 November 2026 (00:00 UTC), too, an entry is rejected when it declares a harness or a model its top-level sessions contradict; a system-prompt or instruction file counts as none when it holds nothing but redaction marks, is not text or is over the size cap, a system prompt also when it is almost all redaction or only a stub line such as none or withheld, and an instruction file when it is the system prompt again in a record a kit from level 22 wrote; and a parent chat counts as none when it repeats a link or is one of the build's own sessions, unless that session asked for the one it parents. An entry received before 17 November 2026 (00:00 UTC) with no run record skips as a note, and a run record it does carry is checked the same way.
+
+    ## Disqualification
+    An entry or entrant is disqualified for:
+    - reaching for the network, probing or escaping the sandbox, or attacking the grader or the scorer
+    - a guide that reaches for the network when it runs, or guide text copied from another guide site, a wiki, a video or a forum post (citing one is allowed), or Rockstar's logo or official artwork in the app or its screenshots, as the finalist review finds them
+    - fabricated, edited, withheld or borrowed transcripts or recordings
+    - entering with recordings of sessions other than the ones that built the entry
+    - submitting someone else's work as your own, or sharing entries between entrants
+    - more than one account per person
+    - making the repository private, removing its license or rewriting history so the submitted commit disappears before verification is complete
+    - exploiting a bug in the gate scorer or the grader to place where the judge's verdicts would not (report it instead)
+    - false information in a claim's payout details (the legal name, the country of residence or the tax form)
+
+    ## After the deadline
+    At the deadline the final phase is locked and every final entry is run twice and gated; then the dev board's top 200 entrants, and every entry it does not rate, play the final heat's Swiss rounds and the playoff, the top 10 are held for the finalist review, the would-be winners' grades are regraded and the entries are scanned for copies. When those checks are done the organisers publish the final rates and the leaderboard and resolve the results. With 3,000 to 10,000 final entries expect about 2 to 4 hours in all, deadline to result, the finalist review's hour included, at the paces measured so far; at the slowest (every run at its time limit and every judge call at the grading budget's pace) about 2.5 to 4.5 hours. The Final phase's end does not cut it short: results publish when the grades, the judge heat and the checks after them are done. The last judged dossier final before these rules were written, with 19,307 submissions, published its results 5 hours 31 minutes after its deadline. Every verdict, with its request and answer, stays on the record.
+
+    ## Payout
+    The final leaderboard is published within 3 days of the deadline, unless a check holds it. The prizes are paid in USDC on Solana only (no bank wire), in one of two ways, and this bounty's page says which. When the bounty opens, its whole reward is locked in make.fun's escrow program on Solana if the escrow can be funded. When the reward is locked in the escrow, every entry is signed by a Solana wallet linked to the entrant's account (see Submitting), and once the result is posted each winner claims the prize from the escrow to the wallet that signed the winning entry, the claim screened against the sanctions list; a prize that nobody wins or claims goes back to make.fun's reward wallet after the escrow's claim window.
+
+    Otherwise the reward is paid from make.fun's reward wallet as follows, and an entry needs no signature. Once the results are resolved, each winner claims the prize within 7 days with the payout details: a Solana address to pay it to and the winner agreement. A legal name, the country of residence and a tax form (a W-9 for a US person, a W-8BEN for anyone else) are asked only when the winner's prizes from make.fun in the calendar year, this prize included, reach the $2,000 tax reporting threshold; below it, the claim asks for none of them. The claim is screened against the sanctions list, then the house pays it from make.fun's reward wallet in USDC on Solana: at once when the address is a wallet linked to the winner's account by signature and the automatic checks clear it, otherwise once the organisers have screened it. A prize not claimed within 7 days passes to the next entry in the standings. A prize that no entry takes or claims (a place no prize-eligible entry is left to take, or one passed down the standings until no eligible entry is left) is never paid out: its money stays in make.fun's reward wallet for later contests.
+
+    Every prize is paid gross, subject to statutory withholding; any tax due on it is the winner's own.
+
+    Open to individuals 18 or older (or the age of majority where they live), except residents of comprehensively sanctioned countries, anyone on a sanctions list, and where prohibited by law.
+  resolution:
+    method: judges
+    summary: "The house AI judge compares the guides two at a time by their screenshots and source outlines; places go by win rate, best first, the playoff's entries first, the top 10 pass a team review, and the 50 highest-ranked share $250."
+    criteria:
+      - "Harness: program/v1 in a sandbox with no network; main.ts writes app/, screenshots/ and dossier.json to /output, and each entry runs twice and the two runs must write the same bytes"
+      - "Gate: app/ plain files within 993 files and directories and 48 MiB, every path within 1,000 UTF-8 bytes, every script, style, module, font, frame, import-map, media and icon reference a file inside app/ (a font or media one may be a data: URL), nothing loaded over the network (references), 3 to 4 screenshots at most 256 KiB and 1280 by 480 pixels, dossier.json as buildDossier writes it at most 1.5 MiB, and app/data/trophies.json naming each of the 55 official trophies by its exact name with a guide (trophies); js_parses is shown and never decides validity"
+      - "Judge: an AI model reads two entries per call, each as its dossier's judge view (one contact sheet of the screenshots and an outline of the source: the Totals line, each file's path, size and declarations), and picks the better trophy guide with a margin from 1 to 5, each pair in both orders; the judge block names superbot at reasoning effort high, and every call goes to z-ai/glm-5.3-flash on OpenRouter"
+      - "Dev: each entry plays the four house guides and the house ladder's rungs, and the top 100 also play up to 8 sealed games against one another that count on the dev board"
+      - "Contenders: when the final's judge heat starts, the top 200 entrants on the dev board (its own order and tie-break, exactly 200: one whose dev rating equals the last of them but who is placed after it is not among them) are the heat's field, and so is every entry the dev board does not rate (no dev judge verdict was recorded for it), which is judged in the final beside them and takes none of the 200 places; every other entry that passed the gate is not among the 200 contenders: it is not judged in the final, keeps its dev rating, ranks below every contender in that order and takes no prize"
+      - "Final: every contender judged afresh in 3 Swiss rounds with the four house guides, then a playoff among the top 52, each pair once"
+      - "Ranking: places go by the score, best first: the playoff's entries first, then win rate, the recorded point estimate of a Bradley-Terry fit; an exact tie goes to the playoff games between the tied entries, then the earlier receipt; entries tied within their intervals are shown tied and paid on the point estimate"
+      - "Review: the top 10 of the settled final heat are held up to 60 minutes for the make.fun team to open offline and clear or disqualify; an undecided one is cleared by rule"
+      - "Rewards: $50 for 1st place, $30 for 2nd place, $15 for 3rd place, $5 each for 4th to 10th place and $3 each for 11th to 50th place, one place per entrant; a paid place a house bot holds is not awarded, and no entry moves up to take it"
+      - "Feed: every entry judged during development shows its screenshots, the cover first, on the bounty's live Feed with its entrant's handle and provisional rank"
+      - "Hosting: every entrant's latest passing guide is public on makefun.sh from its first entry that passes the gate, and the final's top 3 also on makefun.gg; a hosted site loads nothing from another origin, and its traffic is shown for display only, never scored"
+      - "Transcripts: strict; an entry is valid only with the sealed recordings of the agent sessions that built it, which the site witnessed live, and takes no transcript upload"
+      - "Payout: in USDC on Solana only, and the bounty's page says which way: when the reward is locked in make.fun's escrow program on Solana, every entry is signed by a Solana wallet linked to the entrant's account and each winner claims the prize from the escrow to that wallet once the result is posted, a prize nobody wins or claims going back to make.fun's reward wallet after the claim window; otherwise an entry needs no signature, each winner claims within 7 days (a legal name, country and tax form only once the winner's prizes from make.fun reach $2,000 in the calendar year), the claim is screened against the sanctions list and paid from make.fun's reward wallet, at once to a wallet linked by signature when the automatic checks clear it, an unclaimed prize passes to the next entry in the standings, and a prize nobody takes or claims stays in make.fun's reward wallet for later contests"
+    source: The house judge's recorded verdicts on the entries' dossiers and the four fixed house guides
+    verifier: make.fun grader runs every entry twice, gates its files and runs the judge heat after the deadline, keeping every verdict with its request and answer; the results are published and resolved automatically
+    tie_break: "An exact tie on the win rate goes to the entry that took more of the playoff games between the tied entries, then to the earlier receipt: the first of the tied entries submitted places first and the rest follow in the order they were submitted, each taking its own place's prize; a statistical tie is displayed only and never moves a place"
+    announce: "Final leaderboard within 3 days of the deadline unless a check holds it; in USDC on Solana, winners claim from make.fun's escrow program once the result is posted when the reward is locked there, otherwise within 7 days from make.fun's reward wallet"
+    metric:
+      name: Judge win rate
+      unit: millionths
+      better: higher
+
+harness:
+  kind: program/v1
+  runtimes: [node22]
+  input_data: null
+  scorer:
+    runtime: node22
+    entrypoint: scorer/score.ts
+    reference_data: reference
+  scorer_sha256: "bc13a909944f5cc0e12d624f0e730834d53d8898c3fe797e3ce28a582cc7c795"
+  reference_sha256: "e8bfb08906826f62685836028798e948c69fdb63d7c01f28ff0073f8efa71f5b"
+  gate: valid
+  judge:
+    agent:
+      model: superbot
+      prompt: prompt.txt
+      max_output_tokens: 17200
+      reasoning_effort: high
+    dir: judge
+    judge_sha256: "c6332fc20ddc79bd2d3dec06654781b93a86854e5a1458cf1d0975cd83fbf94a"
+    artifact: dossier.json
+    media: dossier
+    ladder:
+      dir: ladder
+      ladder_sha256: ac814d67d2da03b600c1c381f2680b5031f0dedba0e45b0036264a1111432fd5
+    rounds: 3
+    playoff_repeats: 1
+    contenders: 200
+    contend:
+      band: 100
+      games: 8
+      top: 20
+    review:
+      places: 10
+      minutes: 60
+  hosting:
+    dir: app/
+    prefix: gta6trophy
+    entries: all
+    from: entry
+    winners: 3
+    max_files: 993
+    max_bytes: 50331648
+    max_file_bytes: 26214400
+    traffic: {}
+
+phases:
+  - key: dev
+    title: Development
+    description: Each valid entry is judged as it arrives against the four fixed house guides and 8 more games against the house guides nearest its strength; the top 100 by that rate also play up to 8 sealed games against one another, and the board's rates count them. Its provisional rate shows at once with its 90% interval and its screenshots on the Feed. A provisional rate is never weighed; the final heat judges every final entry afresh.
+    starts_at: "2026-11-19T11:00:00Z"
+    ends_at: "2026-11-21T11:00:00Z"
+    scores: live
+  - key: final
+    title: Final
+    description: After the deadline the dev board's top 200 entrants, and every entry it does not rate, are judged afresh in one heat, Swiss rounds then a playoff among the top 52, and the top 10 are held for the finalist review; every other entry keeps its development rate below them, unpaid. Its rates appear with the results, published automatically once the final grades, the judge heat and the checks after them are done.
+    starts_at: "2026-11-21T11:00:00Z"
+    ends_at: "2026-11-22T11:00:00Z"
+    scores: after_finalize
+
+leaderboard:
+  title: Results
+  primary_index: 0
+  feed: true
+  columns:
+    - {key: judge, title: Judge win rate, index: 0, sorting: desc, precision: 0, source: performance.judge.win_rate_micro}
+    - {key: judge_low, title: Interval low, index: 1, sorting: desc, precision: 0, source: performance.judge.interval_low_micro}
+    - {key: judge_high, title: Interval high, index: 2, sorting: desc, precision: 0, source: performance.judge.interval_high_micro}
+    - {key: valid, title: Valid, index: 3, sorting: desc, precision: 0}
+
+submission_rule:
+  rule: Force_Last
+  max_per_day: 5
+  max_total: 10
+  transcripts_required: true
+  strategy_note_required: false
+  license: osi
+  repo_created_after_open: true
+  house_only: false
+  strict_transcripts: true
+  authorship: 12
+
+prizes:
+  - {kind: placement, place: 1, amount_usd: 50, title: 1st place}
+  - {kind: placement, place: 2, amount_usd: 30, title: 2nd place}
+  - {kind: placement, place: 3, amount_usd: 15, title: 3rd place}
+  - {kind: placement, place: 4, amount_usd: 5, title: 4th place}
+  - {kind: placement, place: 5, amount_usd: 5, title: 5th place}
+  - {kind: placement, place: 6, amount_usd: 5, title: 6th place}
+  - {kind: placement, place: 7, amount_usd: 5, title: 7th place}
+  - {kind: placement, place: 8, amount_usd: 5, title: 8th place}
+  - {kind: placement, place: 9, amount_usd: 5, title: 9th place}
+  - {kind: placement, place: 10, amount_usd: 5, title: 10th place}
+  - {kind: placement, place: 11, amount_usd: 3, title: 11th place}
+  - {kind: placement, place: 12, amount_usd: 3, title: 12th place}
+  - {kind: placement, place: 13, amount_usd: 3, title: 13th place}
+  - {kind: placement, place: 14, amount_usd: 3, title: 14th place}
+  - {kind: placement, place: 15, amount_usd: 3, title: 15th place}
+  - {kind: placement, place: 16, amount_usd: 3, title: 16th place}
+  - {kind: placement, place: 17, amount_usd: 3, title: 17th place}
+  - {kind: placement, place: 18, amount_usd: 3, title: 18th place}
+  - {kind: placement, place: 19, amount_usd: 3, title: 19th place}
+  - {kind: placement, place: 20, amount_usd: 3, title: 20th place}
+  - {kind: placement, place: 21, amount_usd: 3, title: 21st place}
+  - {kind: placement, place: 22, amount_usd: 3, title: 22nd place}
+  - {kind: placement, place: 23, amount_usd: 3, title: 23rd place}
+  - {kind: placement, place: 24, amount_usd: 3, title: 24th place}
+  - {kind: placement, place: 25, amount_usd: 3, title: 25th place}
+  - {kind: placement, place: 26, amount_usd: 3, title: 26th place}
+  - {kind: placement, place: 27, amount_usd: 3, title: 27th place}
+  - {kind: placement, place: 28, amount_usd: 3, title: 28th place}
+  - {kind: placement, place: 29, amount_usd: 3, title: 29th place}
+  - {kind: placement, place: 30, amount_usd: 3, title: 30th place}
+  - {kind: placement, place: 31, amount_usd: 3, title: 31st place}
+  - {kind: placement, place: 32, amount_usd: 3, title: 32nd place}
+  - {kind: placement, place: 33, amount_usd: 3, title: 33rd place}
+  - {kind: placement, place: 34, amount_usd: 3, title: 34th place}
+  - {kind: placement, place: 35, amount_usd: 3, title: 35th place}
+  - {kind: placement, place: 36, amount_usd: 3, title: 36th place}
+  - {kind: placement, place: 37, amount_usd: 3, title: 37th place}
+  - {kind: placement, place: 38, amount_usd: 3, title: 38th place}
+  - {kind: placement, place: 39, amount_usd: 3, title: 39th place}
+  - {kind: placement, place: 40, amount_usd: 3, title: 40th place}
+  - {kind: placement, place: 41, amount_usd: 3, title: 41st place}
+  - {kind: placement, place: 42, amount_usd: 3, title: 42nd place}
+  - {kind: placement, place: 43, amount_usd: 3, title: 43rd place}
+  - {kind: placement, place: 44, amount_usd: 3, title: 44th place}
+  - {kind: placement, place: 45, amount_usd: 3, title: 45th place}
+  - {kind: placement, place: 46, amount_usd: 3, title: 46th place}
+  - {kind: placement, place: 47, amount_usd: 3, title: 47th place}
+  - {kind: placement, place: 48, amount_usd: 3, title: 48th place}
+  - {kind: placement, place: 49, amount_usd: 3, title: 49th place}
+  - {kind: placement, place: 50, amount_usd: 3, title: 50th place}
+
+# A house entry holds the place it finishes in, unpaid, and no entry moves up (contest-design.mdc; the Rewards section
+# says so).
+house_holds_places: true
+
+limits:
+  cpus: 1
+  memory_mb: 1024
+  pids: 64
+  wall_budget_sec: 10
+
+min_authored_coverage: 0
+
+# Full auto (the header): the lock, the grades, the judge heat, the publication and the resolve; autopay. Its escrow is
+# funded at the deploy that seeds it open (escrow: at_open), within a minute and before entries open, as the btc-race
+# release template's is: payouts auto then pays from the reward wallet only when that escrow was never funded
+# (server/competitions/load.ts escrowAtOpenIssues, escrowPayoutsIssue). Inert while a draft.
+automation:
+  lifecycle: true
+  payouts: auto
+  escrow: at_open
