@@ -1,25 +1,131 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leonida Trophy Compendium - 55 PS5 Trophy Tracker & Platinum Roadmap</title>
+  <meta name="description" content="Offline tracker and comprehensive guide for all 55 Grand Theft Auto VI PS5 trophies. Features platinum roadmap, missable warnings, anti-spoiler protection, and cited guidance.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
-</header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
-</div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
-<script type="module" src="app.js"></script>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="app-container">
+      <div class="header-brand">
+        <div class="brand-title-wrap">
+          <h1 class="brand-title">Leonida Trophy Compendium</h1>
+          <span class="brand-subtitle">55 PS5 Trophies &amp; Platinum Guide</span>
+        </div>
+      </div>
+      <nav class="nav-tabs" aria-label="Main Navigation">
+        <button type="button" class="nav-tab active" data-tab="checklist">🏆 Trophy Checklist</button>
+        <button type="button" class="nav-tab" data-tab="roadmap">🗺️ Platinum Roadmap</button>
+        <button type="button" class="nav-tab" data-tab="missables">⚠️ Missables (4)</button>
+        <button type="button" class="nav-tab" data-tab="settings">⚙️ Backup &amp; Settings</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="app-container">
+    <!-- Global Stats Header -->
+    <section id="stats-header-container" class="stats-header-container" aria-label="Completion Progress"></section>
+
+    <!-- Filter Toolbar -->
+    <section id="filter-toolbar" class="filter-toolbar" aria-label="Trophy Filters">
+      <div class="search-row">
+        <input type="search" id="search-input" class="search-input" placeholder="Search by trophy title, official description, or guide tactics..." aria-label="Search trophies">
+      </div>
+      <div class="filter-row">
+        <span class="filter-label">Category:</span>
+        <div id="category-filters" class="filter-group">
+          <button type="button" class="filter-btn active" data-category="all">All (55)</button>
+          <button type="button" class="filter-btn" data-category="story">Story</button>
+          <button type="button" class="filter-btn" data-category="strangers">Strangers</button>
+          <button type="button" class="filter-btn" data-category="activities">Activities</button>
+          <button type="button" class="filter-btn" data-category="collectibles">Collectibles</button>
+          <button type="button" class="filter-btn" data-category="heists">Heists &amp; Feats</button>
+          <button type="button" class="filter-btn" data-category="missable">⚠️ Missable</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <span class="filter-label">Grade:</span>
+        <div id="grade-filters" class="filter-group">
+          <button type="button" class="filter-btn active" data-grade="all">All Grades</button>
+          <button type="button" class="filter-btn" data-grade="platinum">Platinum (1)</button>
+          <button type="button" class="filter-btn" data-grade="gold">Gold (2)</button>
+          <button type="button" class="filter-btn" data-grade="silver">Silver (6)</button>
+          <button type="button" class="filter-btn" data-grade="bronze">Bronze (46)</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <span class="filter-label">Status:</span>
+        <div id="status-filters" class="filter-group">
+          <button type="button" class="filter-btn active" data-status="all">All</button>
+          <button type="button" class="filter-btn" data-status="locked">Locked Only</button>
+          <button type="button" class="filter-btn" data-status="earned">Earned Only</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- View 1: Trophy Checklist -->
+    <section id="trophy-list-container" class="trophy-grid" aria-label="Trophy Cards"></section>
+
+    <!-- View 2: Platinum Roadmap -->
+    <div id="roadmap-view-container" class="roadmap-view-container" style="display: none;" aria-label="Platinum Roadmap Stages"></div>
+
+    <!-- View 3: Missable Alerts -->
+    <div id="missables-view-container" class="missables-view-container" style="display: none;" aria-label="Missables Guide"></div>
+
+    <!-- View 4: Backup & Settings Panel -->
+    <div id="settings-view-container" class="settings-panel" style="display: none;" aria-label="Settings and Data Management">
+      <div class="settings-card">
+        <h3>Progress Backup &amp; Transfer</h3>
+        <p>Save your progress to a standalone JSON file or import a saved backup from another browser session.</p>
+        <p id="settings-stats-summary" class="metric-label"></p>
+        <div class="settings-actions">
+          <button type="button" id="btn-export" class="btn-primary">💾 Export Backup (.json)</button>
+          <label class="btn-secondary file-input-label">
+            📂 Import Backup
+            <input type="file" id="file-import" accept=".json,application/json">
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <div class="toggle-row">
+          <div>
+            <h3>Anti-Spoiler Shield</h3>
+            <p>Hides secret story trophy names and campaign mission objectives until unlocked or toggled off.</p>
+          </div>
+          <label class="switch" title="Toggle Anti-Spoiler Shield">
+            <input type="checkbox" id="spoiler-toggle">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <h3>Verified Research Sources</h3>
+        <p>This offline guide compiles verified walkthrough data, trophy objectives, and completion checklists citing leading community compendiums:</p>
+        <ul class="stage-action-list" style="margin-bottom: 0;">
+          <li>PSNProfiles Leonida Roadmap &amp; Trophy Guide</li>
+          <li>PowerPyx Leonida 100% Completion Compendium &amp; Campaign Walkthrough</li>
+          <li>GTA Series Guides - Leonida Heists, Stunt Maps &amp; Activities</li>
+          <li>PlayStationTrophies Community Roadmap &amp; Weapon Mastery Guides</li>
+          <li>Leonida State Explorer's Field Guide</li>
+        </ul>
+      </div>
+
+      <div class="settings-card" style="border-color: rgba(244, 63, 94, 0.3);">
+        <h3 style="color: #fb7185;">Danger Zone</h3>
+        <p>Clear all local browser storage and reset your trophy checklist progress to zero.</p>
+        <div class="settings-actions">
+          <button type="button" id="btn-reset" class="btn-danger">🗑️ Reset All Progress</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="src/app.js"></script>
 </body>
 </html>

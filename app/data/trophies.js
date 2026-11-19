@@ -1,0 +1,692 @@
+// Leonida Trophy Dataset ES Module
+// Official 55 PlayStation 5 trophies with categories, missable flags, roadmap stages, and cited guides
+
+export const trophies = [
+  {
+    "id": 1,
+    "name": "Vice Got a Price!",
+    "description": "Congratulations! You're a Leonida Legend.",
+    "grade": "platinum",
+    "category": "platinum",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 5,
+    "guide": "Unlocked automatically after acquiring all other 54 trophies across Leonida. Culmination of the 100% completion roadmap.",
+    "citation": "Source: PSNProfiles Leonida Roadmap & Trophy Guide"
+  },
+  {
+    "id": 2,
+    "name": "Just Like Paradise",
+    "description": "Complete Gone Fishing.",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Story mission progression. Conclude the introductory chapter prologue mission \"Gone Fishing\" along the mangrove wetlands.",
+    "citation": "Source: PowerPyx Leonida Campaign Walkthrough"
+  },
+
+  {
+    "id": 3,
+    "name": "Paradise Lost",
+    "description": "Complete Chapter 1.",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Story progression. Complete all mandatory syndicate operations across Port Gellhorn concluding Chapter 1.",
+    "citation": "Source: PowerPyx Leonida Campaign Walkthrough"
+  },
+  {
+    "id": 4,
+    "name": "T**s Ass Drug Money",
+    "description": "Complete Chapter 2.",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Story milestone. Finish all core narrative contracts in the nightclub and smuggling circuit ending Chapter 2.",
+    "citation": "Source: GTA Series Guides - Story Missions"
+  },
+
+  {
+    "id": 5,
+    "name": "Vice City, Baby!",
+    "description": "Complete Chapter 3.",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Story milestone. Awarded after securing the premier Ocean Beach penthouse hideout and finishing Chapter 3.",
+    "citation": "Source: GTA Series Guides - Story Missions"
+  },
+  {
+    "id": 6,
+    "name": "Top Of The World, Ma",
+    "description": "Complete Chapter 4.",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Story milestone. Clear the high-altitude corporate tower extraction mission concluding Chapter 4.",
+    "citation": "Source: PowerPyx Leonida Campaign Walkthrough"
+  },
+
+  {
+    "id": 7,
+    "name": "You Gotta Know When to Get Off",
+    "description": "Complete the final mission.",
+    "grade": "gold",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Campaign finale. Complete the climactic joint operation and watch the ending credits sequence roll.",
+    "citation": "Source: PlayStationTrophies Community Roadmap"
+  },
+  {
+    "id": 8,
+    "name": "Trust",
+    "description": "Complete Breakfast Run.",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Story mission. Finish \"Breakfast Run\", which introduces cooperative partner combat commands and synchronized takedowns.",
+    "citation": "Source: PSNProfiles Leonida Guide"
+  },
+
+  {
+    "id": 9,
+    "name": "Break the Bank",
+    "description": "Complete The Cartel Heist.",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Heist milestone. Complete all required reconnaissance boards, breach security, and escape with the Cartel bullion haul.",
+    "citation": "Source: GTA Series Guides - Heist Walkthroughs"
+  },
+  {
+    "id": 10,
+    "name": "Family Matters",
+    "description": "Complete Child's Play.",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Story mission. Successfully protect the suburban safehouse and family contacts during mission \"Child's Play\".",
+    "citation": "Source: PowerPyx Leonida Campaign Walkthrough"
+  },
+
+  {
+    "id": 11,
+    "name": "DWNFALL",
+    "description": "Complete Headliners.",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Story mission. Infiltrate the VIP backstage mezzanine and extract target intel in mission \"Headliners\".",
+    "citation": "Source: GTA Series Guides - Story Missions"
+  },
+  {
+    "id": 12,
+    "name": "Hi-Jacked",
+    "description": "Complete VCIA Takedown.",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Story mission. Intercept the outbound private cargo jet on the VCIA airfield runway during \"VCIA Takedown\".",
+    "citation": "Source: PlayStationTrophies Community Roadmap"
+  },
+
+  {
+    "id": 13,
+    "name": "Snow Storm",
+    "description": "Complete Operation Savage Glory.",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Story mission. Raid the fortified coastal contraband depot during heavy oceanic weather conditions.",
+    "citation": "Source: PSNProfiles Leonida Guide"
+  },
+  {
+    "id": 14,
+    "name": "A Long Road",
+    "description": "Attain 100% Completion.",
+    "grade": "gold",
+    "category": "collectibles",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 5,
+    "guide": "Attain 100% completion in the Pause Menu checklist: all main missions, 8 stranger strands, 250 stunts, shooting challenges, cards, and properties.",
+    "citation": "Source: PowerPyx Leonida 100% Completion Compendium"
+  },
+
+  {
+    "id": 15,
+    "name": "Cunning Stunts",
+    "description": "Complete 250 Stunts.",
+    "grade": "silver",
+    "category": "activities",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Land 250 unique stunt jumps, billboard ramps, and precision bridge drifts throughout Leonida county roads.",
+    "citation": "Source: GTA Series Guides - Stunt Map & Jump Locations"
+  },
+  {
+    "id": 16,
+    "name": "Master of None",
+    "description": "Try each type of activity once.",
+    "grade": "bronze",
+    "category": "activities",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Participate in every recreational mini-game at least once: bowling, arcade cabinet, drone race, street race, fishing, and meditation.",
+    "citation": "Source: PlayStationTrophies Community Roadmap"
+  },
+
+  {
+    "id": 17,
+    "name": "The Shootist",
+    "description": "Earn a gold medal in all Shooting Range challenges.",
+    "grade": "silver",
+    "category": "activities",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Achieve gold target scores across all 42 weapon firing trials at Ammu-Nation (Pistols, SMGs, Rifles, Shotguns, Heavy).",
+    "citation": "Source: PSNProfiles Weapon Mastery Guide"
+  },
+  {
+    "id": 18,
+    "name": "Top Fun",
+    "description": "Win a Top Fun Drone Race at every location.",
+    "grade": "bronze",
+    "category": "activities",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Locate all 8 Top Fun drone obstacle course terminals in Vice City and the Keys, winning 1st place in each race.",
+    "citation": "Source: GTA Series Guides - Drone Challenges"
+  },
+
+  {
+    "id": 19,
+    "name": "Earn Cash, Not Kudos",
+    "description": "Win 20 different races.",
+    "grade": "bronze",
+    "category": "activities",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Place first in 20 distinct street races, off-road rallies, and speedboat circuits around the Leonida waterways.",
+    "citation": "Source: PowerPyx Leonida Sports Guide"
+  },
+  {
+    "id": 20,
+    "name": "Baited My Tackle",
+    "description": "Beat Cal in a fishing challenge.",
+    "grade": "bronze",
+    "category": "activities",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Head to the marina in the Florida Keys backcountry and catch a heavier trophy bass or tarpon than Cal within 5 minutes.",
+    "citation": "Source: Leonida State Explorer's Field Guide"
+  },
+
+  {
+    "id": 21,
+    "name": "Stick Fiddler",
+    "description": "Complete an arcade game.",
+    "grade": "bronze",
+    "category": "activities",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Play any retro arcade machine in a local tavern or boardwalk arcade and clear all stages to beat the high score.",
+    "citation": "Source: PlayStationTrophies Community Roadmap"
+  },
+  {
+    "id": 22,
+    "name": "Road to Rehabilitation",
+    "description": "Complete the final mission for Andy.",
+    "grade": "bronze",
+    "category": "strangers",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 2,
+    "guide": "Complete all 4 Stranger & Freak encounters for Andy starting outside the county clinic to finish his arc.",
+    "citation": "Source: PSNProfiles Strangers & Freaks Guide"
+  },
+
+  {
+    "id": 23,
+    "name": "This Was No Boat Accident",
+    "description": "Complete the final mission for Kenton.",
+    "grade": "bronze",
+    "category": "strangers",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 2,
+    "guide": "Complete Kenton's offshore shipwreck salvage chain culminating in recovery of the sunken submarine crate.",
+    "citation": "Source: GTA Series Guides - Strangers & Freaks"
+  },
+  {
+    "id": 24,
+    "name": "The Lone Rider",
+    "description": "Complete the final mission for Billy.",
+    "grade": "bronze",
+    "category": "strangers",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 2,
+    "guide": "Complete the 3 desert outpost motorcycle trials for veteran rider Billy along the western ridge.",
+    "citation": "Source: PowerPyx Leonida Strangers Compendium"
+  },
+
+  {
+    "id": 25,
+    "name": "Strangers & Freaks",
+    "description": "Complete 8 mission strands for strangers across the state of Leonida.",
+    "grade": "silver",
+    "category": "strangers",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 2,
+    "guide": "Finish 8 full multi-stage Stranger & Freak questlines (Andy, Kenton, Billy, Randy, Tyrone, and 3 others).",
+    "citation": "Source: PSNProfiles Leonida Guide"
+  },
+  {
+    "id": 26,
+    "name": "Supply & Demand",
+    "description": "Complete the final mission for Randy.",
+    "grade": "bronze",
+    "category": "strangers",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 2,
+    "guide": "Fulfill Randy's swamp contraband supply network deliveries across the airboat channels to finish his story.",
+    "citation": "Source: GTA Series Guides - Strangers & Freaks"
+  },
+
+  {
+    "id": 27,
+    "name": "Spin On This!",
+    "description": "Complete the final mission for Tyrone.",
+    "grade": "bronze",
+    "category": "strangers",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 2,
+    "guide": "Help vinyl collector Tyrone recover master recordings and reclaim his audio studio from rival promoters.",
+    "citation": "Source: PowerPyx Leonida Strangers Compendium"
+  },
+  {
+    "id": 28,
+    "name": "Positive Mental Attitude",
+    "description": "Meditate at every spot across Leonida.",
+    "grade": "bronze",
+    "category": "activities",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Interact with all 12 panoramic meditation yoga mats positioned at cliff summits, rooftops, and quiet coastal shores.",
+    "citation": "Source: Leonida State Explorer's Field Guide"
+  },
+
+  {
+    "id": 29,
+    "name": "Fair Game",
+    "description": "Hunt a unique animal for Bret.",
+    "grade": "bronze",
+    "category": "activities",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Track down and hunt the legendary albino alligator in the deep marshlands using hunting lure for Bret's trophy lodge.",
+    "citation": "Source: Leonida State Explorer's Field Guide"
+  },
+  {
+    "id": 30,
+    "name": "Don't Touch My Deck",
+    "description": "Complete 3 Collectible Card sets.",
+    "grade": "silver",
+    "category": "collectibles",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 3,
+    "guide": "Collect all 30 cards across 3 complete sets (Vice Legends, Neon Muscle, Leonida Fauna) scattered in hidden spots.",
+    "citation": "Source: GTA Series Guides - Collectible Card Map"
+  },
+
+  {
+    "id": 31,
+    "name": "You WAiNKer!",
+    "description": "WAiNK It at 100 locations.",
+    "grade": "silver",
+    "category": "collectibles",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 3,
+    "guide": "Tag WAiNK social app camera check-ins at 100 designated architectural monuments, murals, and scenic spots.",
+    "citation": "Source: PowerPyx Collectibles Guide"
+  },
+  {
+    "id": 32,
+    "name": "One Last Thing",
+    "description": "Complete 50 Challenges.",
+    "grade": "bronze",
+    "category": "heists",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 3,
+    "guide": "Complete 50 weapon, driving, combat, and criminal feats listed in the Career Challenges interface.",
+    "citation": "Source: PSNProfiles Leonida Guide"
+  },
+
+  {
+    "id": 33,
+    "name": "Hot Together",
+    "description": "Lose a 4 star Wanted Level with your partner and escape the heat.",
+    "grade": "bronze",
+    "category": "heists",
+    "hidden": false,
+    "missable": true,
+    "roadmapStage": 1,
+    "guide": "MISSABLE ALERT: Attain a 4-star wanted level while riding together with your partner in free-roam, break police line of sight in backstreets, and evade heat.",
+    "citation": "Source: PSNProfiles Duo Combat Guide"
+  },
+  {
+    "id": 34,
+    "name": "Retail Therapy",
+    "description": "Rob 3 shops back-to-back with your partner without losing your Wanted Level.",
+    "grade": "bronze",
+    "category": "heists",
+    "hidden": false,
+    "missable": true,
+    "roadmapStage": 1,
+    "guide": "MISSABLE ALERT: Rob 3 consecutive 24/7 convenience stores with your partner companion present while continuously maintaining police pursuit.",
+    "citation": "Source: GTA Series Guides - Robbery Tactics"
+  },
+
+  {
+    "id": 35,
+    "name": "Whip It Good",
+    "description": "Discover 100 vehicles.",
+    "grade": "bronze",
+    "category": "collectibles",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 3,
+    "guide": "Enter the driver seat of 100 distinct vehicle models (sedans, coupes, exotics, bikes, boats, choppers) to catalogue them.",
+    "citation": "Source: Leonida State Explorer's Field Guide"
+  },
+  {
+    "id": 36,
+    "name": "Gunslinger",
+    "description": "Take down 5 enemies in a single use of Combat Focus.",
+    "grade": "bronze",
+    "category": "heists",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Activate Combat Focus slow-motion capability and score 5 quick headshot eliminations before the adrenaline meter expires.",
+    "citation": "Source: PlayStationTrophies Community Roadmap"
+  },
+
+  {
+    "id": 37,
+    "name": "Catch Me If You Can",
+    "description": "Make an unscheduled departure at VCIA.",
+    "grade": "bronze",
+    "category": "heists",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Infiltrate Vice City International Airport runway, hijack any commercial jet or jetliner, and take off successfully.",
+    "citation": "Source: GTA Series Guides - Special Feats"
+  },
+  {
+    "id": 38,
+    "name": "Challenging Tank",
+    "description": "Kinda hot in these Rhinos.",
+    "grade": "bronze",
+    "category": "heists",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Enter the fortified military perimeter, commandeer a Rhino armored tank, and maintain control inside for 2 continuous minutes.",
+    "citation": "Source: PlayStationTrophies Community Roadmap"
+  },
+
+  {
+    "id": 39,
+    "name": "Sneakthief",
+    "description": "Rob a jewelry store without being detected.",
+    "grade": "bronze",
+    "category": "heists",
+    "hidden": true,
+    "missable": true,
+    "roadmapStage": 1,
+    "guide": "MISSABLE ALERT: Choose the stealth reconnaissance option for the Vivaldi Diamond Heist. Deploy sleeping gas through HVAC vents, collect gems, and slip out undetected.",
+    "citation": "Source: PowerPyx Leonida Heists Compendium"
+  },
+  {
+    "id": 40,
+    "name": "Maximum Withdrawal",
+    "description": "Rob 5 Bank Vaults and escape.",
+    "grade": "silver",
+    "category": "heists",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 5,
+    "guide": "Successfully crack open the vault doors of 5 major commercial banks across Leonida, loot safety deposit boxes, and escape.",
+    "citation": "Source: GTA Series Guides - Bank Vault Heists"
+  },
+
+  {
+    "id": 41,
+    "name": "A Classic Blitz Play",
+    "description": "Rob an Armored Truck and escape.",
+    "grade": "bronze",
+    "category": "heists",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Ambush a random armored cash transport on the highway, blow open the reinforced back doors with plastic explosives, take cash, and escape.",
+    "citation": "Source: PSNProfiles Leonida Guide"
+  },
+  {
+    "id": 42,
+    "name": "The Goodtime State",
+    "description": "Explore all of Leonida.",
+    "grade": "bronze",
+    "category": "collectibles",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 3,
+    "guide": "Unveil 100% of the world map fog across all metropolitan districts, suburban canals, swamps, and oceanic borders.",
+    "citation": "Source: Leonida State Explorer's Field Guide"
+  },
+
+  {
+    "id": 43,
+    "name": "Pest Control",
+    "description": "Rob an Illegal Operation belonging to each gang.",
+    "grade": "bronze",
+    "category": "heists",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Raid and clean out an illegal production lab or stash house belonging to each of the 4 hostile factions in the state.",
+    "citation": "Source: GTA Series Guides - Gang Warfare"
+  },
+  {
+    "id": 44,
+    "name": "In The Beginning…",
+    "description": "Enjoy a cocktail with a view on Ocean Beach.",
+    "grade": "bronze",
+    "category": "activities",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Order and sip a signature cocktail at the open-air Ocean Beach rooftop terrace during evening golden hour.",
+    "citation": "Source: PlayStationTrophies Community Roadmap"
+  },
+
+  {
+    "id": 45,
+    "name": "Capital Offense",
+    "description": "Smash your way out of a vehicle showroom in classic style.",
+    "grade": "bronze",
+    "category": "heists",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Hijack the exotic showcase supercar inside the luxury dealership showroom and burst through the plate-glass facade onto the avenue.",
+    "citation": "Source: PowerPyx Leonida Stunt Guide"
+  },
+  {
+    "id": 46,
+    "name": "Let’s Go Bowling",
+    "description": "Follow-through at the Kolt & Associates' bowling alley.",
+    "grade": "bronze",
+    "category": "activities",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Play a ten-pin bowling match at Kolt & Associates lanes and score three strikes in a row (a turkey).",
+    "citation": "Source: PlayStationTrophies Community Roadmap"
+  },
+
+  {
+    "id": 47,
+    "name": "Personal Best",
+    "description": "A partnership with mass appeal.",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Max out the duo syndicate chemistry rating and social live-stream follower audience during story milestones.",
+    "citation": "Source: PSNProfiles Duo Guide"
+  },
+  {
+    "id": 48,
+    "name": "Actions Speak Louder",
+    "description": "Choices made (for better or worse).",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": true,
+    "roadmapStage": 1,
+    "guide": "CRITICAL MISSABLE: During the decisive moral choice at the end of Chapter 3, commit to the mutual trust pact rather than betrayal.",
+    "citation": "Source: PowerPyx Decision Walkthrough"
+  },
+
+  {
+    "id": 49,
+    "name": "Bad Luck, I Guess",
+    "description": "Second time's the charm.",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Story milestone. Survive the prisoner transport ambuscade and regroup safely at the backcountry safehouse.",
+    "citation": "Source: PSNProfiles Leonida Guide"
+  },
+  {
+    "id": 50,
+    "name": "The Truth Is Out There",
+    "description": "What the hell just happened?",
+    "grade": "bronze",
+    "category": "story",
+    "hidden": true,
+    "missable": false,
+    "roadmapStage": 1,
+    "guide": "Trigger the classified deep-space radio observatory anomaly in the northern backcountry at 3:00 AM in rainy weather.",
+    "citation": "Source: GTA Series Guides - Easter Eggs & Secrets"
+  },
+
+  {
+    "id": 51,
+    "name": "Ten Pin",
+    "description": "Bowl 'em over with a melee drive-by.",
+    "grade": "bronze",
+    "category": "heists",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "While operating a motorcycle or scooter, strike and knock down 5 pedestrians with a baseball bat in rapid succession.",
+    "citation": "Source: PlayStationTrophies Community Roadmap"
+  },
+  {
+    "id": 52,
+    "name": "Dime on the Dollar",
+    "description": "Earn $250,000 laundering Marked Bills through your contacts.",
+    "grade": "bronze",
+    "category": "heists",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Process dirty heist bills through acquired front properties (car washes, laundromats) to clean $250,000.",
+    "citation": "Source: PowerPyx Economy & Business Guide"
+  },
+
+  {
+    "id": 53,
+    "name": "Treat Yo Self",
+    "description": "Spend $100,000 across all shops.",
+    "grade": "bronze",
+    "category": "heists",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Spend a cumulative $100,000 across boutique clothing stores, weapon modifications, and performance vehicle tuning shops.",
+    "citation": "Source: PSNProfiles Leonida Guide"
+  },
+  {
+    "id": 54,
+    "name": "Little Boxes",
+    "description": "Purchase all garage properties.",
+    "grade": "bronze",
+    "category": "collectibles",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Purchase all 7 garage properties and lockups listed on the Dynasty8 real estate website across Leonida.",
+    "citation": "Source: Leonida State Explorer's Field Guide"
+  },
+
+  {
+    "id": 55,
+    "name": "On the Spot",
+    "description": "Register 10 vehicles to the Scooter Bros app.",
+    "grade": "bronze",
+    "category": "heists",
+    "hidden": false,
+    "missable": false,
+    "roadmapStage": 4,
+    "guide": "Locate and deliver 10 designated scooters and vintage mopeds to drop points requested via the in-game Scooter Bros app.",
+    "citation": "Source: GTA Series Guides - Vehicle App Deliveries"
+  }
+];

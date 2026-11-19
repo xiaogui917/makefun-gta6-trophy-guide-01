@@ -1,9 +1,17 @@
-# Ignored directories and artifacts
+# Build outputs and temporary sandboxes
 out/
 .shot-tools/
 node_modules/
+
+# Environment and sensitive keys
 .env
+.env.*
 *.keypair
 *.json.keypair
 id_*.json
 makefun-keypair.json
+keypair*.json
+
+# OS and editor files
+.DS_Store
+Thumbs.db
